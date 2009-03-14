@@ -1,10 +1,10 @@
 <?php
-// $Id: features.export.inc,v 1.1 2009/03/13 21:59:23 yhahn Exp $
+// $Id: features.export.inc,v 1.1.2.1 2009/03/14 17:28:54 yhahn Exp $
 
 /**
  * Export form.
  */
-function features_export_form($form_state, $module_name = '') {
+function features_export_form($form_state, $module = NULL) {
   $steps = array(
     t('Step 1: provide basic information'),
     t('Step 2: choose sources'),
@@ -13,18 +13,18 @@ function features_export_form($form_state, $module_name = '') {
   );
 
   // we are re-exporting a module -- load up data and export
-  if (!empty($module_name) && $module = features_get_features($module_name)) {
+  if (!empty($module)) {
     $step =
     $form_state['storage']['step'] = 3;
 
-    $steps[3] = t('Update your feature: !module_name', array('!module_name' => $module_name));
+    $steps[3] = t('Update your feature: !module_name', array('!module_name' => $module->name));
 
     $form_state['storage']['info'] = array(
       'name' => $module->info['name'],
-      'filename' => $module_name,
+      'filename' => $module->name,
       'description' => $module->info['description'],
     );
-    $form_state['storage']['export_final'] = features_populate($module->info['feature'], $module_name);
+    $form_state['storage']['export_final'] = features_populate($module->info['feature'], $module->name);
   }
   // we are coming in without a step, so default to step 1
   else {
