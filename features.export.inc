@@ -1,5 +1,5 @@
 <?php
-// $Id: features.export.inc,v 1.1.2.2 2009/03/14 17:51:57 yhahn Exp $
+// $Id: features.export.inc,v 1.1.2.3 2009/03/14 18:02:45 yhahn Exp $
 
 /**
  * Export form.
@@ -546,36 +546,6 @@ function theme_features_export_form_final($form) {
 
   $output .= theme('table', $header, $rows, array('class' => 'features-export features-export-final'));
   $output .= drupal_render($form);
-  return $output;
-}
-
-/**
- * Export var function -- from Views.
- */
-function features_var_export($var, $prefix = '', $multiple = TRUE) {
-  if (is_array($var)) {
-    if (empty($var)) {
-      $output = 'array()';
-    }
-    else {
-      $output = "array(\n";
-      foreach ($var as $key => $value) {
-        $output .= "  '$key' => ". context_var_export($value, $prefix . ($multiple? '' : '  ')) .",\n";
-      }
-      $output .= ')';
-    }
-  }
-  else if (is_bool($var)) {
-    $output = $var ? 'TRUE' : 'FALSE';
-  }
-  else {
-    $output = var_export($var, TRUE);
-  }
-
-  if ($prefix) {
-    $output = str_replace("\n", "\n$prefix", $output);
-  }
-
   return $output;
 }
 

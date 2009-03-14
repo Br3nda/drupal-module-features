@@ -1,5 +1,5 @@
 <?php
-// $Id: features.module,v 1.1.2.3 2009/03/14 17:51:57 yhahn Exp $
+// $Id: features.module,v 1.1.2.4 2009/03/14 18:02:45 yhahn Exp $
 
 /**
  * @file
@@ -312,6 +312,36 @@ function features_menu_links($level = 0, $reset = FALSE) {
   }
   drupal_alter('features_menu_links', $links[$level]);
   return $links[$level];
+}
+
+/**
+ * Export var function -- from Views.
+ */
+function features_var_export($var, $prefix = '', $multiple = TRUE) {
+  if (is_array($var)) {
+    if (empty($var)) {
+      $output = 'array()';
+    }
+    else {
+      $output = "array(\n";
+      foreach ($var as $key => $value) {
+        $output .= "  '$key' => ". features_var_export($value, $prefix . ($multiple? '' : '  ')) .",\n";
+      }
+      $output .= ')';
+    }
+  }
+  else if (is_bool($var)) {
+    $output = $var ? 'TRUE' : 'FALSE';
+  }
+  else {
+    $output = var_export($var, TRUE);
+  }
+
+  if ($prefix) {
+    $output = str_replace("\n", "\n$prefix", $output);
+  }
+
+  return $output;
 }
 
 /**
