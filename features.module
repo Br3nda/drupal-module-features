@@ -1,5 +1,5 @@
 <?php
-// $Id: features.module,v 1.1 2009/03/13 21:59:23 yhahn Exp $
+// $Id: features.module,v 1.1.2.1 2009/03/14 02:13:10 yhahn Exp $
 
 /**
  * @file
@@ -26,6 +26,13 @@ function features_menu() {
     'page callback' => 'drupal_get_form',
     'page arguments' => array('features_admin_form'),
     'type' => MENU_NORMAL_ITEM,
+    'file' => 'features.admin.inc',
+  );
+  $items['admin/features/cache-clear'] = array(
+    'title' => 'Features',
+    'description' => 'Administer features.',
+    'page callback' => 'features_cache_clear',
+    'type' => MENU_CALLBACK,
     'file' => 'features.admin.inc',
   );
   $items['admin/features/manage'] = array(
