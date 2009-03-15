@@ -1,5 +1,5 @@
 <?php
-// $Id: features.module,v 1.1.2.5 2009/03/15 06:11:50 yhahn Exp $
+// $Id: features.module,v 1.1.2.6 2009/03/15 18:40:05 yhahn Exp $
 
 /**
  * @file
@@ -57,7 +57,7 @@ function features_menu() {
     'description' => 'Display components of a feature.',
     'page callback' => 'features_admin_components',
     'page arguments' => array(3),
-    'type' => MENU_NORMAL_ITEM,
+    'type' => MENU_CALLBACK,
     'file' => 'features.admin.inc',
   );
   $items['admin/build/features/%feature/view'] = array(
