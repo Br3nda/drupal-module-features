@@ -1,4 +1,5 @@
 <?php
+// $Id: features.block.inc,v 1.1.2.1 2009/03/16 15:18:58 jmiccolis Exp $
 
 /**
  * Implementation of hook_features_export().
