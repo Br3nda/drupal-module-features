@@ -1,5 +1,5 @@
 <?php
-// $Id: features.menu.inc,v 1.1 2009/03/13 21:59:24 yhahn Exp $
+// $Id: features.menu.inc,v 1.1.2.1 2009/03/17 00:59:10 jmiccolis Exp $
 
 /**
  * Implementation of hook_features_export_options().
@@ -28,7 +28,7 @@ function menu_features_export($data, &$export) {
     // Query for links in the features table... if they exist, add to export object.
     $result = db_query("SELECT * FROM {menu_links} WHERE link_path = '%s' AND menu_name = 'features'", $path);
     while ($row = db_fetch_array($result)) {
-      $export['items']['menu'][$path] = $path;
+      $export['features']['menu'][$path] = $path;
       break;
     }
     // We could add menu module as a dependency here but it's not actually necessary...

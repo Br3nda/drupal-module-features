@@ -1,5 +1,5 @@
 <?php
-// $Id: features.node.inc,v 1.1.2.1 2009/03/14 17:51:57 yhahn Exp $
+// $Id: features.node.inc,v 1.1.2.2 2009/03/17 00:59:10 jmiccolis Exp $
 
 /**
  * Implementation of hook_features_export_options().
@@ -30,7 +30,7 @@ function node_features_export($data, &$export, $module_name = '') {
 
       $export['dependencies'][$info] = $info;
       if ($info == 'node') {
-        $export['items']['node'][$type] = $type;
+        $export['features']['node'][$type] = $type;
       }
 
       // If this node type is provided by a different module, add it as a dependency

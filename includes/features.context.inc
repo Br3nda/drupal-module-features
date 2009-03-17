@@ -1,5 +1,5 @@
 <?php
-// $Id: features.context.inc,v 1.1 2009/03/13 21:59:24 yhahn Exp $
+// $Id: features.context.inc,v 1.1.2.1 2009/03/17 00:59:10 jmiccolis Exp $
 
 /**
  * Implementation of hook_features_export().
@@ -11,7 +11,7 @@ function context_features_export($data, &$export) {
   $contexts = context_enabled_contexts();
   foreach ($data as $identifier) {
     if (!empty($contexts[$identifier])) {
-      $export['items']['context'][$identifier] = $identifier;
+      $export['features']['context'][$identifier] = $identifier;
 
       $context = $contexts[$identifier];
       if (!empty($context->node)) {

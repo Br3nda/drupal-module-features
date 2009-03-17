@@ -1,5 +1,5 @@
 <?php
-// $Id: features.imagecache.inc,v 1.1.2.2 2009/03/14 18:02:46 yhahn Exp $
+// $Id: features.imagecache.inc,v 1.1.2.3 2009/03/17 00:59:10 jmiccolis Exp $
 
 // Implementation of hook_features_export_options().
 function imagecache_features_export_options() {
@@ -13,7 +13,7 @@ function imagecache_features_export_options() {
 // Implementation of hook_features_export
 function imagecache_features_export($data, &$export) {
   foreach ($data as $preset) {
-    $export['items']['imagecache'][$preset] = $preset;
+    $export['features']['imagecache'][$preset] = $preset;
   }
 }
 

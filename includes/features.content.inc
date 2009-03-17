@@ -1,5 +1,5 @@
 <?php
-// $Id: features.content.inc,v 1.1 2009/03/13 21:59:24 yhahn Exp $
+// $Id: features.content.inc,v 1.1.2.1 2009/03/17 00:59:10 jmiccolis Exp $
 
 /**
  * Implementation of hook_features_export().
@@ -17,7 +17,7 @@ function content_features_export($data, &$export) {
 
     if ($field) {
       // Add field item instance for later export.
-      $export['items']['content'][$instance] = $instance;
+      $export['features']['content'][$instance] = $instance;
 
       // Add module which provides field.
       $export['dependencies'][$field['module']] = $field['module'];
