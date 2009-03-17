@@ -1,5 +1,5 @@
 <?php
-// $Id: features.context.inc,v 1.1.2.1 2009/03/17 00:59:10 jmiccolis Exp $
+// $Id: features.context.inc,v 1.1.2.2 2009/03/17 19:55:44 yhahn Exp $
 
 /**
  * Implementation of hook_features_export().
@@ -14,18 +14,17 @@ function context_features_export($data, &$export) {
       $export['features']['context'][$identifier] = $identifier;
 
       $context = $contexts[$identifier];
-      if (!empty($context->node)) {
-        $pipe['node'] = $context->node;
+
+      foreach (array('node', 'views', 'menu') as $key) {
+        if (!empty($context->{$key})) {
+          foreach ($context->{$key} as $item) {
+            $pipe[$key][$item] = $item;
+          }
+        }
       }
-      if (!empty($context->views)) {
-        $pipe['views'] = $context->views;
-      }
-      if (!empty($context->menu)) {
-        $pipe['menu'] = array($context->menu);
-      }
+
       // Special pipe for blocks
       if (!empty($context->block)) {
-        $pipe['block'] = array();
         foreach ($context->block as $block) {
           $block = (array) $block;
           $bid = "{$block['module']}-{$block['delta']}";
@@ -34,7 +33,6 @@ function context_features_export($data, &$export) {
       }
     }
   }
-
   return $pipe;
 }
 

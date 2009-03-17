@@ -1,5 +1,5 @@
 <?php
-// $Id: features.block.inc,v 1.1.2.1 2009/03/16 15:18:58 jmiccolis Exp $
+// $Id: features.block.inc,v 1.1.2.2 2009/03/17 19:55:44 yhahn Exp $
 
 /**
  * Implementation of hook_features_export().
@@ -24,8 +24,9 @@ function block_features_export($data, &$export) {
 
         $delta_split = explode('-', $delta);
         $view_name = $delta_split[0];
-
-        $pipe['views'][] = $view_name;
+        if (!empty($view_name)) {
+          $pipe['views'][] = $view_name;
+        }
         break;
     }
   }
