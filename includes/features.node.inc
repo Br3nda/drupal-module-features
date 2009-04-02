@@ -1,5 +1,5 @@
 <?php
-// $Id: features.node.inc,v 1.1.2.2 2009/03/17 00:59:10 jmiccolis Exp $
+// $Id: features.node.inc,v 1.1.2.3 2009/04/02 15:49:22 yhahn Exp $
 
 /**
  * Implementation of hook_features_export_options().
@@ -27,7 +27,6 @@ function node_features_export($data, &$export, $module_name = '') {
   foreach ($data as $type) {
     // Poll node module to determine who provides the node type.
     if ($info = node_get_types('module', $type)) {
-
       $export['dependencies'][$info] = $info;
       if ($info == 'node') {
         $export['features']['node'][$type] = $type;
@@ -35,8 +34,9 @@ function node_features_export($data, &$export, $module_name = '') {
 
       // If this node type is provided by a different module, add it as a dependency
       $module = $type_map[$type];
-      if (!$module && $module != $module_name) {
+      if ($module && $module != $module_name) {
         $export['dependencies'][$module] = $module;
+        unset($export['features']['node'][$type]);
       }
 
       // Create a pipe for CCK fields
