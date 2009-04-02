@@ -1,5 +1,5 @@
 <?php
-// $Id: features.module,v 1.1.2.9 2009/03/17 13:08:55 yhahn Exp $
+// $Id: features.module,v 1.1.2.10 2009/04/02 14:16:25 yhahn Exp $
 
 /**
  * @file
@@ -354,6 +354,16 @@ function features_var_export($var, $prefix = '', $multiple = TRUE) {
   }
 
   return $output;
+}
+
+/**
+ * Helper function to eliminate whitespace differences in code.
+ */
+function _features_linetrim($code) {
+  foreach ($code as $k => $line) {
+    $code[$k] = trim($line);
+  }
+  return $code;
 }
 
 /**
