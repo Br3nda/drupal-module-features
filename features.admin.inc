@@ -1,5 +1,5 @@
 <?php
-// $Id: features.admin.inc,v 1.1.2.8 2009/04/02 14:16:25 yhahn Exp $
+// $Id: features.admin.inc,v 1.1.2.9 2009/04/02 15:49:42 yhahn Exp $
 
 /**
  * admin/build/features page callback.
@@ -26,9 +26,11 @@ function features_admin_form($feature = NULL) {
   // Generate features form.
   foreach (features_get_features('', TRUE) as $name => $module) {
     $unmet_dependencies = array();
-    foreach ($module->info['dependencies'] as $dependency) {
-      if (empty($modules[$dependency])) {
-        $unmet_dependencies[] = theme('features_module_status', FEATURES_MODULE_MISSING, $dependency);
+    if (!empty($module->info['dependencies'])) {
+      foreach ($module->info['dependencies'] as $dependency) {
+        if (empty($modules[$dependency])) {
+          $unmet_dependencies[] = theme('features_module_status', FEATURES_MODULE_MISSING, $dependency);
+        }
       }
     }
 
@@ -105,9 +107,11 @@ function features_admin_components($feature) {
 
   // Iterate over dependencies and retrieve status for display
   $dependencies = array();
-  foreach ($feature->info['dependencies'] as $dependency) {
-    $status = features_get_module_status($dependency);
-    $dependencies[$dependency] = $status;
+  if (!empty($feature->info['dependencies'])) {
+    foreach ($feature->info['dependencies'] as $dependency) {
+      $status = features_get_module_status($dependency);
+      $dependencies[$dependency] = $status;
+    }
   }
 
   // Iterate over components and retrieve status for display

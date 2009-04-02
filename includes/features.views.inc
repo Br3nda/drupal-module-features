@@ -1,5 +1,5 @@
 <?php
-// $Id: features.views.inc,v 1.1.2.2 2009/03/17 00:59:10 jmiccolis Exp $
+// $Id: features.views.inc,v 1.1.2.3 2009/04/02 15:49:42 yhahn Exp $
 
 /**
  * Implementation of hook_features_export_options().
@@ -199,10 +199,12 @@ function views_plugin_dependencies() {
     $map = array();
     foreach (module_implements('views_plugins') as $module) {
       $plugins = module_invoke($module, 'views_plugins');
-      foreach ($plugins as $type => $items) {
-        if (is_array($items)) {
-          foreach (array_keys($items) as $plugin_name) {
-            $map[$type][$plugin_name] = $module;
+      if (!empty($plugins)) {
+        foreach ($plugins as $type => $items) {
+          if (is_array($items)) {
+            foreach (array_keys($items) as $plugin_name) {
+              $map[$type][$plugin_name] = $module;
+            }
           }
         }
       }
