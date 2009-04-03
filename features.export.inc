@@ -1,5 +1,5 @@
 <?php
-// $Id: features.export.inc,v 1.1.2.13 2009/04/02 14:51:25 yhahn Exp $
+// $Id: features.export.inc,v 1.1.2.14 2009/04/03 21:53:40 yhahn Exp $
 
 /**
  * Export form.
@@ -411,6 +411,7 @@ function features_export_render($export, $module_name, $reset = FALSE) {
 
   // Prepare the defaults
   $code['defaults.inc'] = array();
+  ksort($export['features']);
   foreach ($export['features'] as $module => $data) {
     if (!empty($data)) {
       // Attempt to load inc file for the module, will fail silently if the file
