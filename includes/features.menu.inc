@@ -1,5 +1,5 @@
 <?php
-// $Id: features.menu.inc,v 1.1.2.1 2009/03/17 00:59:10 jmiccolis Exp $
+// $Id: features.menu.inc,v 1.1.2.2 2009/04/05 17:56:02 yhahn Exp $
 
 /**
  * Implementation of hook_features_export_options().
@@ -42,10 +42,6 @@ function menu_features_export($data, &$export) {
  */
 function menu_features_export_render($module = 'foo', $data) {
   $code = array();
-  $code[] = '/**';
-  $code[] = ' * Implementation of hook_menu_default_items().';
-  $code[] = ' */';
-  $code[] = "function {$module}_menu_default_items() {";
   $code[] = '  $items = array();';
   $code[] = '';
 
@@ -71,6 +67,6 @@ function menu_features_export_render($module = 'foo', $data) {
   }
   $code[] = '';
   $code[] = '  return $items;';
-  $code[] = '}';
-  return implode("\n", $code);
+  $code = implode("\n", $code);
+  return array('menu_default_items' => $code);
 }

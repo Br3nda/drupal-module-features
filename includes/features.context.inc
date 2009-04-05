@@ -1,5 +1,5 @@
 <?php
-// $Id: features.context.inc,v 1.1.2.4 2009/04/02 14:16:25 yhahn Exp $
+// $Id: features.context.inc,v 1.1.2.5 2009/04/05 17:56:02 yhahn Exp $
 
 /**
  * Implementation of hook_features_export().
@@ -47,10 +47,6 @@ function context_features_export($data, &$export) {
  */
 function context_features_export_render($module = 'foo', $data) {
   $code = array();
-  $code[] = '/**';
-  $code[] = ' * Implementation of hook_context_default_contexts().';
-  $code[] = ' */';
-  $code[] = "function {$module}_context_default_contexts() {";
   $code[] = '  $items = array();';
   $code[] = '';
 
@@ -79,6 +75,6 @@ function context_features_export_render($module = 'foo', $data) {
   }
 
   $code[] = '  return $items;';
-  $code[] = '}';
-  return implode("\n", $code);
+  $code = implode("\n", $code);
+  return array('context_default_contexts' => $code);
 }
