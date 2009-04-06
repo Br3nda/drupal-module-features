@@ -1,5 +1,5 @@
 <?php
-// $Id: features.export.inc,v 1.1.2.15 2009/04/05 17:56:01 yhahn Exp $
+// $Id: features.export.inc,v 1.1.2.16 2009/04/06 02:51:58 yhahn Exp $
 
 /**
  * Export form.
@@ -519,7 +519,9 @@ function features_detect_overrides($module) {
               switch (get_class($current[$i][$j])) {
                 case 'view':
                   $a = $current[$i][$j]->export();
-                  $b = $default[$i][$j]->export();
+                  if ($default[$i][$j]) {
+                    $b = $default[$i][$j]->export();
+                  }
                   break;
                 default:
                   $a = features_var_export($current[$i][$j]);
