@@ -1,5 +1,5 @@
 <?php
-// $Id: features.module,v 1.1.2.16 2009/04/07 20:28:28 yhahn Exp $
+// $Id: features.module,v 1.1.2.17 2009/04/07 20:48:23 yhahn Exp $
 
 /**
  * @file
@@ -159,6 +159,14 @@ function features_theme_registry_alter(&$theme_registry) {
   $position = array_search('template_preprocess_page', $theme_registry['page']['preprocess functions']);
   $position = $position ? $position + 1 : 2;
   array_splice($theme_registry['page']['preprocess functions'], $position, 0, 'features_preprocess_page');
+}
+
+/**
+ * Implementation of hook_flush_caches().
+ */
+function features_flush_caches() {
+  features_rebuild();
+  return array();
 }
 
 /**
