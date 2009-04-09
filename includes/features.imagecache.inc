@@ -1,5 +1,5 @@
 <?php
-// $Id: features.imagecache.inc,v 1.1.2.6 2009/04/08 21:11:25 yhahn Exp $
+// $Id: features.imagecache.inc,v 1.1.2.7 2009/04/09 19:01:19 yhahn Exp $
 
 /**
  * Implementation of hook_features_export_options().
@@ -27,7 +27,7 @@ function imagecache_features_export($data, &$export, $module_name = '') {
   }
   foreach ($data as $preset) {
     // If another module provides this preset, add it as a dependency
-    if (isset($map[$preset])) {
+    if (isset($map[$preset]) && $map[$preset] != $module_name) {
       $module = $map[$preset];
       $export['dependencies'][$module] = $module;
     }
