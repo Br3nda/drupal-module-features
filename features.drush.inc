@@ -1,5 +1,5 @@
 <?php
-// $Id: features.drush.inc,v 1.1.2.6 2009/04/05 17:56:01 yhahn Exp $
+// $Id: features.drush.inc,v 1.1.2.7 2009/04/10 15:37:11 yhahn Exp $
 
 /**
  * @file
@@ -142,6 +142,8 @@ function features_command_update() {
  *  from the first listed context.
  */
 function _features_command_export($stub, $module_name = NULL, $destination = 'sites/all/modules') {
+  drupal_flush_all_caches();
+
   module_load_include('inc', 'features', 'features.export');
   $export = features_populate($stub, $module_name);
   if ($feature = feature_load($module_name)) {
