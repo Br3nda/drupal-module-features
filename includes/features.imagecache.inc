@@ -1,5 +1,5 @@
 <?php
-// $Id: features.imagecache.inc,v 1.1.2.7 2009/04/09 19:01:19 yhahn Exp $
+// $Id: features.imagecache.inc,v 1.1.2.8 2009/04/25 01:09:25 yhahn Exp $
 
 /**
  * Implementation of hook_features_export_options().
@@ -55,4 +55,33 @@ function imagecache_features_export_render($module_name, $data) {
   $code = "  \$items = ". features_var_export($items, '  ') .";\n";
   $code .= '  return $items;';
   return array('imagecache_default_presets' => $code);
+}
+
+/**
+ * Implementation of hook_features_revert().
+ *
+ * @param $module
+ * name of module to revert content for
+ */
+function imagecache_features_revert($module = NULL) {
+  // Get all presets defined in this feature
+  if (module_hook($module, 'imagecache_default_presets')) {
+    $default_presets = module_invoke($module, 'imagecache_default_presets');
+
+    // Get all DB defined presets
+    $current_presets = imagecache_presets();
+    // update all presets to their default values
+    foreach($default_presets as $default_preset) {
+      foreach($current_presets as $current_preset) {
+        if ($current_preset['presetname'] == $default_preset['presetname']) {
+          imagecache_preset_delete($current_preset);
+        }
+      }
+    }
+  }
+  else {
+    drupal_set_message(t('Could not load default imagecache presets.'), 'error');
+    return FALSE;
+  }
+  return TRUE;
 }

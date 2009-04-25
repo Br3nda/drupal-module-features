@@ -1,5 +1,5 @@
 <?php
-// $Id: features.node.inc,v 1.1.2.4 2009/04/05 17:56:02 yhahn Exp $
+// $Id: features.node.inc,v 1.1.2.5 2009/04/25 01:09:25 yhahn Exp $
 
 /**
  * Implementation of hook_features_export_options().
@@ -87,4 +87,34 @@ function node_features_export_render($module = 'foo', $data) {
   $output[] = '  return $items;';
   $output = implode("\n", $output);
   return array('node_info' => $output);
+}
+
+/**
+ * Implementation of hook_features_revert().
+ *
+ * @param $module
+ * name of module to revert content for
+ */
+function node_features_revert($module = NULL) {
+  // Get default node types
+  if (module_hook($module, 'node_info')){
+    $default_types = module_invoke($module, 'node_info');
+
+    // Delete node types
+    // We don't use node_type_delete() because we do not actually
+    // want to delete the node type (and invoke hook_node_type()).
+    // This can lead to bad consequences like CCK deleting field
+    // storage in the DB.
+    foreach ($default_types as $type_name => $type_info) {
+      db_query("DELETE FROM {node_type} WHERE type = '%s'", $type_name);
+    }
+  }
+  else {
+    drupal_set_message(t('Could not load default node types.'), 'error');
+    // drush_print(dt('Could not load default node types.'));
+    return FALSE;
+  }
+  node_types_rebuild();
+  menu_rebuild();
+  return TRUE;
 }

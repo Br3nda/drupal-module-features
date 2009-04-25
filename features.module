@@ -1,5 +1,5 @@
 <?php
-// $Id: features.module,v 1.1.2.17 2009/04/07 20:48:23 yhahn Exp $
+// $Id: features.module,v 1.1.2.18 2009/04/25 01:09:25 yhahn Exp $
 
 /**
  * @file
@@ -313,7 +313,7 @@ function features_content_fields_rebuild() {
     if (empty($conflicts)) {
       $instance = content_fields($field['field_name'], $field['type_name']);
       if (!empty($instance)) {
-        $field = array_merge($instance, $field);
+        $field = array_merge($field, $instance);
       }
       content_field_instance_update($field);
     }

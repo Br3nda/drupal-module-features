@@ -1,5 +1,5 @@
 <?php
-// $Id: features.content.inc,v 1.1.2.3 2009/04/13 01:19:16 yhahn Exp $
+// $Id: features.content.inc,v 1.1.2.4 2009/04/25 01:09:25 yhahn Exp $
 
 /**
  * Implementation of hook_features_export().
@@ -96,4 +96,28 @@ function content_features_export_render($module = 'foo', $data) {
   $code[] = '  return $fields;';
   $code = implode("\n", $code);
   return array('content_default_fields' => $code);
+}
+
+/**
+ * Implementation of hook_features_revert().
+ *
+ * @param $module
+ * name of module to revert content for
+ */
+function content_features_revert($module = NULL) {
+  // Get all fields defined in this feature
+  if (module_hook($module, 'content_default_fields')) {
+    module_load_include('inc', 'content', 'includes/content.crud');
+    $default_fields = module_invoke($module, 'content_default_fields');
+
+    // update all fields to their default values
+    foreach($default_fields as $field) {
+      content_field_instance_update($field);
+    }
+  }
+  else {
+    drupal_set_message(t('Could not load default fields.'), 'error');
+    return FALSE;
+  }
+  return TRUE;
 }
