@@ -1,5 +1,5 @@
 <?php
-// $Id: features.drush.inc,v 1.1.2.8 2009/04/25 01:09:25 yhahn Exp $
+// $Id: features.drush.inc,v 1.1.2.9 2009/05/06 14:39:57 yhahn Exp $
 
 /**
  * @file
@@ -17,7 +17,7 @@
 function features_drush_command() {
   $items = array();
 
-  $items['status features'] = array(
+  $items['features'] = array(
     'callback' => 'features_command_list',
     'description' => "List all the available features for your site.",
   );
