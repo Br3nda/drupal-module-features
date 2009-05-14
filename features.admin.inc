@@ -1,5 +1,5 @@
 <?php
-// $Id: features.admin.inc,v 1.1.2.10 2009/04/20 18:17:52 yhahn Exp $
+// $Id: features.admin.inc,v 1.1.2.11 2009/05/14 05:46:06 yhahn Exp $
 
 /**
  * admin/build/features page callback.
@@ -176,19 +176,7 @@ function features_form_submit(&$form, &$form_state) {
     }
   }
 
-  // Clear the cache to respect any changes.
-  features_get_modules(NULL, TRUE);
-  $form['#redirect'] = 'admin/build/features/cache-clear';
-}
-
-/**
- * Cache clear menu callback.
- */
-function features_cache_clear() {
-  drupal_rebuild_theme_registry();
-  node_types_rebuild();
-  menu_rebuild();
-  drupal_goto('admin/build/features');
+  drupal_flush_all_caches();
 }
 
 /**
