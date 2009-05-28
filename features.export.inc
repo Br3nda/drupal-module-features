@@ -1,5 +1,5 @@
 <?php
-// $Id: features.export.inc,v 1.1.2.17 2009/04/10 15:37:11 yhahn Exp $
+// $Id: features.export.inc,v 1.1.2.18 2009/05/28 23:54:18 yhahn Exp $
 
 /**
  * Export form.
@@ -366,6 +366,23 @@ function _features_export_minimize_dependencies($dependencies, $module_name = ''
     }
   }
   return $dependencies;
+}
+
+/**
+ * Iterates over a list of dependencies and maximize the list of modules.
+ */
+function _features_export_maximize_dependencies($dependencies, $module_name = '', $first = TRUE) {
+  // Minimize dependencies first.
+  $dependencies = $first ? _features_export_minimize_dependencies($dependencies, $module_name) : $dependencies;
+
+  $maximized = $dependencies;
+  foreach ($dependencies as $k => $v) {
+    $module = features_get_modules($v);
+    if ($module && !empty($module->info['dependencies'])) {
+      $maximized = array_merge($maximized, _features_export_maximize_dependencies($module->info['dependencies'], $module_name, FALSE));
+    }
+  }
+  return array_unique($maximized);
 }
 
 /**
