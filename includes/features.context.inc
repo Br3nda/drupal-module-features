@@ -1,5 +1,27 @@
 <?php
-// $Id: features.context.inc,v 1.1.2.8 2009/04/25 01:09:25 yhahn Exp $
+// $Id: features.context.inc,v 1.1.2.9 2009/05/31 02:44:04 yhahn Exp $
+
+/**
+ * Implementation of hook_features_api().
+ */
+function context_features_api() {
+  return array(
+    'feature_source' => TRUE,
+    'default_hook' => 'context_default_contexts',
+  );
+}
+
+/**
+ * Implementation of hook_features_export_options();
+ */
+function context_features_export_options() {
+  $contexts = context_enabled_contexts();
+  $options = array();
+  foreach ($contexts as $identifier => $context) {
+    $options[$identifier] = "{$context->namespace} > {$context->attribute} > {$context->value}";
+  }
+  return $options;
+}
 
 /**
  * Implementation of hook_features_export().

@@ -1,5 +1,14 @@
 <?php
-// $Id: features.imagecache.inc,v 1.1.2.8 2009/04/25 01:09:25 yhahn Exp $
+// $Id: features.imagecache.inc,v 1.1.2.9 2009/05/31 02:44:04 yhahn Exp $
+
+/**
+ * Implementation of hook_features_api().
+ */
+function imagecache_features_api() {
+  return array(
+    'default_hook' => 'imagecache_default_presets',
+  );
+}
 
 /**
  * Implementation of hook_features_export_options().

@@ -1,20 +1,27 @@
 <?php
-// $Id: features.views.inc,v 1.1.2.7 2009/05/06 05:57:17 yhahn Exp $
+// $Id: features.views.inc,v 1.1.2.8 2009/05/31 02:44:04 yhahn Exp $
+
+/**
+ * Implementation of hook_features_api().
+ */
+function views_features_api() {
+  return array(
+    'feature_source' => TRUE,
+    'default_hook' => 'views_default_views',
+  );
+}
 
 /**
  * Implementation of hook_features_export_options().
  */
 function views_features_export_options() {
   $enabled_views = array();
-
   $views = views_get_all_views();
-
   foreach ($views as $view) {
     if (!isset($views[$view->name]->disabled) || !$views[$view->name]->disabled) {
       $enabled_views[$view->name] = $view->name;
     }
   }
-
   ksort($enabled_views);
   return $enabled_views;
 }

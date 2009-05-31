@@ -1,5 +1,15 @@
 <?php
-// $Id: features.node.inc,v 1.1.2.6 2009/05/06 06:03:29 yhahn Exp $
+// $Id: features.node.inc,v 1.1.2.7 2009/05/31 02:44:04 yhahn Exp $
+
+/**
+ * Implementation of hook_features_api().
+ */
+function node_features_api() {
+  return array(
+    'feature_source' => TRUE,
+    'default_hook' => 'node_info',
+  );
+}
 
 /**
  * Implementation of hook_features_export_options().

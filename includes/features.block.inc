@@ -1,5 +1,12 @@
 <?php
-// $Id: features.block.inc,v 1.1.2.2 2009/03/17 19:55:44 yhahn Exp $
+// $Id: features.block.inc,v 1.1.2.3 2009/05/31 02:44:04 yhahn Exp $
+
+/**
+ * Implementation of hook_features_api().
+ */
+function block_features_api() {
+  return array();
+}
 
 /**
  * Implementation of hook_features_export().
