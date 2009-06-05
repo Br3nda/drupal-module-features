@@ -1,5 +1,5 @@
 <?php
-// $Id: features.admin.inc,v 1.1.2.13 2009/05/31 02:44:04 yhahn Exp $
+// $Id: features.admin.inc,v 1.1.2.14 2009/06/05 04:18:48 yhahn Exp $
 
 /**
  * admin/build/features page callback.
@@ -186,7 +186,7 @@ function features_form_submit(&$form, &$form_state) {
 }
 
 /**
- * Page callback to display the differences between what's in code and 
+ * Page callback to display the differences between what's in code and
  * what is in the db.
  *
  * @param $module

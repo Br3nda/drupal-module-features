@@ -1,5 +1,5 @@
 <?php
-// $Id: theme.inc,v 1.1.2.3 2009/05/31 02:44:04 yhahn Exp $
+// $Id: theme.inc,v 1.1.2.4 2009/06/05 04:18:48 yhahn Exp $
 
 /**
  * Display feature component info
@@ -114,6 +114,11 @@ function theme_features_form($form) {
     }
     $rows[] = array('data' => $row, 'class' => $class);
   }
+
+  if (empty($rows)) {
+    $rows[] = array('', array('data' => t('No features available.'), 'colspan' => 4));
+  }
+
   $output .= theme('table', $header, $rows, array('id' => 'features-form-table', 'class' => 'features'));
 
   // Prevent section from being rendered by drupal_render().
