@@ -1,4 +1,4 @@
-// $Id: features.js,v 1.1.2.3 2009/03/17 13:08:55 yhahn Exp $
+// $Id: features.js,v 1.1.2.4 2009/06/07 15:43:57 yhahn Exp $
 
 Drupal.behaviors.featuresTable = function() {
   $('table.features input').bind('change', function() {
@@ -9,7 +9,34 @@ Drupal.behaviors.featuresTable = function() {
       $(this).parents('tr').addClass('enabled').removeClass('disabled');
     }
   });
+
+  Drupal.features.checkStatus();
 };
+
+Drupal.features = {
+  'checkStatus': function() {
+    $('table.features tbody tr').not('.processed').filter(':first').each(function() {
+      var elem = $(this);
+      $(elem).addClass('processed');
+      var uri = $(this).find('a.admin-check').attr('href');
+      if (uri) {
+        $.get(uri, [], function(data) {
+          $(elem).find('.admin-loading').hide();
+          if (data.status == 1) {
+            $(elem).find('.admin-overridden').show();
+          }
+          else {
+            $(elem).find('.admin-default').show();
+          }
+          Drupal.features.checkStatus();
+        }, 'json')
+      }
+      else {
+          Drupal.features.checkStatus();
+        }
+    });
+  }
+}
 
 Drupal.behaviors.featuresMachineReadable = function() {
   if ($('.feature-name').size() > 0) {

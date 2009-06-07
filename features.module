@@ -1,5 +1,5 @@
 <?php
-// $Id: features.module,v 1.1.2.22 2009/05/31 02:44:04 yhahn Exp $
+// $Id: features.module,v 1.1.2.23 2009/06/07 15:43:57 yhahn Exp $
 
 /**
  * @file
@@ -75,6 +75,14 @@ function features_menu() {
     'type' => MENU_LOCAL_TASK,
     'file' => "features.export.inc",
     'weight' => 10,
+  );
+    $items['admin/build/features/%feature/status'] = array(
+    'title' => 'Status',
+    'description' => 'Javascript status call back.',
+    'page callback' => 'features_feature_status',
+    'page arguments' => array(3),
+    'type' => MENU_CALLBACK,
+    'file' => 'features.admin.inc',
   );
   foreach ($items as $path => $item) {
     $items[$path]['access callback'] = 'user_access';
