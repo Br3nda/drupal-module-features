@@ -1,5 +1,5 @@
 <?php
-// $Id: features.export.inc,v 1.1.2.21 2009/06/05 05:15:20 yhahn Exp $
+// $Id: features.export.inc,v 1.1.2.22 2009/06/10 01:06:08 yhahn Exp $
 
 /**
  * Export form.
@@ -749,6 +749,24 @@ function features_var_export($var, $prefix = '', $init = TRUE) {
     $output = str_replace("***BREAK***", "\n", $output);
   }
 
+  return $output;
+}
+
+/**
+ * Helper function to return an array of t()'d translatables strings.
+ * Useful for providing a separate array of translatables with your
+ * export so that string extractors like potx can detect them.
+ */
+function features_translatables_export($translatables, $prefix = '') {
+  sort($translatables);
+  $translatables = array_unique($translatables);
+
+  $output = $prefix . "// Translatables\n";
+  $output .= $prefix . "array(\n";
+  foreach ($translatables as $string) {
+    $output .= $prefix . "  t('" . strtr($string, array("'" => "\'")) . "'),\n";
+  }
+  $output .= $prefix . ");\n";
   return $output;
 }
 

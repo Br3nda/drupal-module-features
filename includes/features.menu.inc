@@ -1,5 +1,5 @@
 <?php
-// $Id: features.menu.inc,v 1.1.2.3 2009/05/31 02:44:04 yhahn Exp $
+// $Id: features.menu.inc,v 1.1.2.4 2009/06/10 01:06:09 yhahn Exp $
 
 /**
  * Implementation of hook_features_api().
@@ -52,6 +52,8 @@ function menu_features_export_render($module = 'foo', $data) {
   $code[] = '  $items = array();';
   $code[] = '';
 
+  $translatables = array();
+
   foreach ($data as $path) {
     // Query for links only in the features table
     $result = db_query("SELECT * FROM {menu_links} WHERE link_path = '%s' AND menu_name = 'features'", $path);
@@ -61,17 +63,23 @@ function menu_features_export_render($module = 'foo', $data) {
         'path' => $row['link_path'],
         'weight' => $row['weight'],
       );
+      $translatables[] = $row['link_title'];
 
       // Add in description field
       $options = unserialize($row['options']);
       if (!empty($options['attributes']['title'])) {
         $link['description'] = $options['attributes']['title'];
+        $translatables[] = $options['attributes']['title'];
       }
 
       $code[] = "  \$items[] = ". features_var_export($link, '  ') .";";
       break;
     }
   }
+  if (!empty($translatables)) {
+    $code[] = features_translatables_export($translatables, '  ');
+  }
+
   $code[] = '';
   $code[] = '  return $items;';
   $code = implode("\n", $code);

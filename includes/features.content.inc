@@ -1,5 +1,5 @@
 <?php
-// $Id: features.content.inc,v 1.1.2.5 2009/05/31 02:44:04 yhahn Exp $
+// $Id: features.content.inc,v 1.1.2.6 2009/06/10 01:06:09 yhahn Exp $
 
 /**
  * Implementation of hook_features_api().
@@ -85,7 +85,8 @@ function content_features_export($data, &$export, $module_name = '') {
  * Implementation of hook_features_export_render().
  */
 function content_features_export_render($module = 'foo', $data) {
-  $code = array();
+  $translatables = $code = array();
+
   $code[] = '  $fields = array();';
   $code[] = '';
   foreach ($data as $instance) {
@@ -101,6 +102,14 @@ function content_features_export_render($module = 'foo', $data) {
     $code[] = '  // Exported field: '. $field_name;
     $code[] = '  $fields[] = '. features_var_export($field, '  ') .';';
     $code[] = '';
+
+    // Add any labels to translatables array.
+    if (!empty($field['widget']['label'])) {
+      $translatables[] = $field['widget']['label'];
+    }
+  }
+  if (!empty($translatables)) {
+    $code[] = features_translatables_export($translatables, '  ');
   }
   $code[] = '  return $fields;';
   $code = implode("\n", $code);
