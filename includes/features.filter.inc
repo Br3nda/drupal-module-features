@@ -1,5 +1,5 @@
 <?php
-// $Id: features.filter.inc,v 1.1.2.2 2009/06/18 06:49:35 yhahn Exp $
+// $Id: features.filter.inc,v 1.1.2.3 2009/06/23 18:39:50 yhahn Exp $
 
 /**
  * Implementation of hook_features_api().
@@ -123,6 +123,13 @@ function _filter_features_update($format, $update = FALSE) {
     $roles = array_flip(user_roles());
     $format_rids = array();
     foreach ($format['roles'] as $role_name) {
+      // Ensure that each role exists. If it does not, create it and store the rid.
+      if (!isset($roles[$role_name])) {
+        $record = array('name' => $role_name);
+        drupal_write_record('role', $record);
+        $roles[$role_name] = $record['rid'];
+      }
+      // Retrieve the rid corresponding to each role and add it to the format's rids
       if (isset($roles[$role_name])) {
         $format_rids[] = $roles[$role_name];
       }
