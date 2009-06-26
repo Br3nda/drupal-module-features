@@ -1,5 +1,5 @@
 <?php
-// $Id: features.admin.inc,v 1.1.2.18 2009/06/21 21:03:56 yhahn Exp $
+// $Id: features.admin.inc,v 1.1.2.19 2009/06/26 22:26:25 yhahn Exp $
 
 /**
  * admin/build/features page callback.
@@ -8,7 +8,7 @@ function features_admin_form($feature = NULL) {
   // Load export functions to use in comparison.
   module_load_include('inc', 'features', 'features.export');
 
-  // Clear the module cache
+  // Clear & rebuild key caches
   module_rebuild_cache();
   features_rebuild();
 
@@ -231,7 +231,19 @@ function features_form_submit(&$form, &$form_state) {
     }
   }
 
+  // Clear drupal caches after enabling a feature. We do this in a separate
+  // page callback rather than as part of the submit handler as some modules
+  // have includes/other directives of importance in hooks that have already
+  // been called in this page load.
+  $form_state['#redirect'] = 'admin/build/features/cache-clear';
+}
+
+/**
+ * Clear caches after enabling a feature.z
+ */
+function features_cache_clear() {
   drupal_flush_all_caches();
+  drupal_goto('admin/build/features');
 }
 
 /**
