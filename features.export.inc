@@ -1,5 +1,5 @@
 <?php
-// $Id: features.export.inc,v 1.1.2.24 2009/06/22 03:20:46 yhahn Exp $
+// $Id: features.export.inc,v 1.1.2.25 2009/07/10 14:17:13 yhahn Exp $
 
 /**
  * Update form.
@@ -707,7 +707,7 @@ function features_export_render_features($module, $hook, $code) {
 function features_export_render_defaults($module, $hook, $code) {
   $output = array();
   $output[] = "/**";
-  $output[] = " * Helper to implemetation of hook_{$hook}().";
+  $output[] = " * Helper to implementation of hook_{$hook}().";
   $output[] = " */";
   $output[] = "function _{$module}_{$hook}() {";
   $output[] = $code;
