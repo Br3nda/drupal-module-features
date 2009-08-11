@@ -1,5 +1,5 @@
 <?php
-// $Id: features.module,v 1.1.2.37 2009/08/11 19:02:13 yhahn Exp $
+// $Id: features.module,v 1.1.2.38 2009/08/11 19:31:00 yhahn Exp $
 
 /**
  * @file
@@ -336,7 +336,7 @@ function features_invoke_all() {
   $hook = $args[0];
   unset($args[0]);
   $return = array();
-  foreach (features_get_components() as $component) {
+  foreach (features_get_components() as $component => $info) {
     $result = features_invoke($component, $hook);
     if (isset($result) && is_array($result)) {
       $return = array_merge_recursive($return, $result);
