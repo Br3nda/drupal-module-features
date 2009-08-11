@@ -1,12 +1,14 @@
 <?php
-// $Id: features.content.inc,v 1.1.2.6 2009/06/10 01:06:09 yhahn Exp $
+// $Id: features.content.inc,v 1.1.2.7 2009/08/11 15:02:45 yhahn Exp $
 
 /**
  * Implementation of hook_features_api().
  */
 function content_features_api() {
   return array(
-    'default_hook' => 'content_default_fields',
+    'content' => array(
+      'default_hook' => 'content_default_fields',
+    ),
   );
 }
 
