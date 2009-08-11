@@ -1,5 +1,5 @@
 <?php
-// $Id: features.ctools.inc,v 1.1.2.2 2009/08/11 15:02:45 yhahn Exp $
+// $Id: features.ctools.inc,v 1.1.2.3 2009/08/11 19:02:13 yhahn Exp $
 
 /**
  * This is a wild hack, but effective.
@@ -27,6 +27,7 @@ function ctools_features_api() {
   $components['ctools'] = array(
     'default_hook' => 'ctools_plugin_api',
     'feature_source' => TRUE,
+    'duplicates' => FEATURES_DUPLICATES_ALLOWED,
   );
   return $components;
 }
