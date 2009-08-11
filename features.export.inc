@@ -1,5 +1,5 @@
 <?php
-// $Id: features.export.inc,v 1.1.2.32 2009/08/11 18:19:51 yhahn Exp $
+// $Id: features.export.inc,v 1.1.2.33 2009/08/11 20:39:42 yhahn Exp $
 
 /**
  * Update form.
@@ -490,7 +490,7 @@ function _features_export_minimize_dependencies($dependencies, $module_name = ''
       }
     }
   }
-  return $dependencies;
+  return drupal_map_assoc(array_unique($dependencies));
 }
 
 /**
