@@ -1,5 +1,5 @@
 <?php
-// $Id: features.module,v 1.1.2.39 2009/08/27 18:05:48 jmiccolis Exp $
+// $Id: features.module,v 1.1.2.40 2009/09/02 20:45:17 yhahn Exp $
 
 /**
  * @file
@@ -370,6 +370,9 @@ function features_get_info($type = 'module', $name = NULL, $reset = FALSE) {
     while ($row = db_fetch_object($result)) {
       $row->info = drupal_parse_info_file(dirname($row->filename) .'/'. $row->name .'.info');
       if (!empty($row->info)) {
+        // Invoke hook_system_info_alter() to give installed modules a chance to
+        // modify the data in the .info files if necessary.
+        drupal_alter('system_info', $row->info, $row);
         if (!empty($row->info['features'])) {
           $data['feature'][$row->name] = $row;
         }
