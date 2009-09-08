@@ -1,5 +1,5 @@
 <?php
-// $Id: features.export.inc,v 1.1.2.33 2009/08/11 20:39:42 yhahn Exp $
+// $Id: features.export.inc,v 1.1.2.34 2009/09/08 22:17:04 jmiccolis Exp $
 
 /**
  * Update form.
@@ -791,9 +791,9 @@ function features_export_info($info) {
           $key = $l;
         }
         if (is_array($m)) {
-          sort($m);
+          asort($m);
           foreach ($m as $n => $o) {
-            $code[] = "{$k}[$key][] = \"{$o}\"";
+            $code[] = "{$k}[$key][] = \"{$n}\"";
           }
         }
         else {
