@@ -1,5 +1,5 @@
 <?php
-// $Id: features.node.inc,v 1.1.2.8 2009/08/11 15:02:45 yhahn Exp $
+// $Id: features.node.inc,v 1.1.2.9 2009/09/11 02:19:46 yhahn Exp $
 
 /**
  * Implementation of hook_features_api().
@@ -85,6 +85,12 @@ function node_features_export_render($module = 'foo', $data) {
   $output[] = '  $items = array(';
   foreach ($data as $type) {
     $info = node_get_types('type', $type);
+
+    // Force module name to be 'features' - if we leave as 'node'
+    // the content type will be assumed to be database-stored by
+    // the node module.
+    $info->module = 'features';
+
     $output[] = "    '{$type}' => array(";
     foreach ($elements as $key => $t) {
       if ($t) {
