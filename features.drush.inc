@@ -1,5 +1,5 @@
 <?php
-// $Id: features.drush.inc,v 1.1.2.12 2009/08/11 15:02:45 yhahn Exp $
+// $Id: features.drush.inc,v 1.1.2.13 2009/09/13 23:23:23 yhahn Exp $
 
 /**
  * @file
@@ -161,8 +161,7 @@ function _features_command_export($stub, $module_name = NULL, $destination = 'si
   module_load_include('inc', 'features', 'features.export');
   $export = features_populate($stub, $module_name);
   if ($feature = feature_load($module_name)) {
-    $export['name'] = $feature->info['name'];
-    $export['description'] = $feature->info['description'];
+    $export['dependencies'] = _features_export_preserve_dependencies($export['dependencies'], $module_name);
   }
   else {
     $export['name'] = $module_name;
