@@ -1,5 +1,5 @@
 <?php
-// $Id: features.node.inc,v 1.1.2.9 2009/09/11 02:19:46 yhahn Exp $
+// $Id: features.node.inc,v 1.1.2.10 2009/09/13 23:20:28 yhahn Exp $
 
 /**
  * Implementation of hook_features_api().
@@ -41,7 +41,7 @@ function node_features_export($data, &$export, $module_name = '') {
     // Poll node module to determine who provides the node type.
     if ($info = node_get_types('module', $type)) {
       $export['dependencies'][$info] = $info;
-      if ($info == 'node') {
+      if (in_array($info, array('node', 'features'))) {
         $export['features']['node'][$type] = $type;
       }
 
