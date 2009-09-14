@@ -1,5 +1,5 @@
 <?php
-// $Id: features.export.inc,v 1.1.2.36 2009/09/14 03:36:35 yhahn Exp $
+// $Id: features.export.inc,v 1.1.2.37 2009/09/14 03:49:01 yhahn Exp $
 
 /**
  * Form callback for features export form. Acts as a router based on the form_state.
@@ -509,10 +509,12 @@ function features_detect_overrides($module) {
         // Eval the database version of the export
         if (isset($code[$component][$default_hook])) {
           $compare['current'] = eval($code[$component][$default_hook]);
+          $compare['current'] = is_array($compare['current']) ? $compare['current'] : array();
         }
         // Call the existing in-code function and collect results
         if (module_hook($module->name, $default_hook)) {
           $compare['default'] = module_invoke($module->name, $default_hook);
+          $compare['default'] = is_array($compare['default']) ? $compare['default'] : array();
         }
         // Export both versions
         foreach ($compare as $storage => $items) {
