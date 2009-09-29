@@ -1,5 +1,5 @@
 <?php
-// $Id: features.admin.inc,v 1.1.2.24 2009/09/14 03:36:35 yhahn Exp $
+// $Id: features.admin.inc,v 1.1.2.25 2009/09/29 20:31:04 yhahn Exp $
 
 /**
  * admin/build/features page callback.
@@ -90,7 +90,8 @@ function features_admin_form($feature = NULL) {
     ));
     $actions .= '<span class="admin-overridden"> | </span>';
     $actions .= l(t('Revert'), "admin/build/features/{$name}/revert", array(
-      'attributes' => array('class' => 'admin-overridden')
+      'attributes' => array('class' => 'admin-overridden'),
+      'query' => drupal_get_destination(),
     ));
 
     if ($module->status) {
