@@ -1,5 +1,5 @@
 <?php
-// $Id: features.install,v 1.1.2.1 2009/09/11 02:19:46 yhahn Exp $
+// $Id: features.install,v 1.1.2.2 2009/09/29 20:07:33 yhahn Exp $
 
 /**
  * Implementaton of hook_install().
@@ -13,8 +13,10 @@ function features_install() {
  * Create menu. See menu.install for an example.
  */
 function _features_install_menu() {
-  $t = get_t();
-  db_query("INSERT INTO {menu_custom} (menu_name, title, description) VALUES ('%s', '%s', '%s')", 'features', $t('Features'), $t('Menu items for any enabled features.'));
+  if (db_table_exists('menu_custom')) {
+    $t = get_t();
+    db_query("INSERT INTO {menu_custom} (menu_name, title, description) VALUES ('%s', '%s', '%s')", 'features', $t('Features'), $t('Menu items for any enabled features.'));
+  }
 }
 
 /**
