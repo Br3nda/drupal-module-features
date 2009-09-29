@@ -1,5 +1,5 @@
 <?php
-// $Id: features.node.inc,v 1.1.2.11 2009/09/29 15:32:43 jmiccolis Exp $
+// $Id: features.node.inc,v 1.1.2.12 2009/09/29 20:19:00 yhahn Exp $
 
 /**
  * Implementation of hook_features_api().
@@ -80,6 +80,8 @@ function node_features_export_render($module = 'foo', $data) {
     'title_label' => TRUE,
     'has_body' => FALSE,
     'body_label' => TRUE,
+    'min_word_count' => FALSE,
+    'help' => TRUE,
   );
   $output = array();
   $output[] = '  $items = array(';
