@@ -1,5 +1,5 @@
 <?php
-// $Id: theme.inc,v 1.1.2.6 2009/09/13 23:23:23 yhahn Exp $
+// $Id: theme.inc,v 1.1.2.7 2009/09/29 15:22:17 jmiccolis Exp $
 
 /**
  * Display feature component info
@@ -136,7 +136,7 @@ function theme_features_form_export($form) {
  * Theme a set of features export components.
  */
 function theme_features_form_components($form) {
-  $options = '';
+  $output = '';
   foreach (element_children($form) as $key) {
     unset($form[$key]['#title']);
     $output .= "<div class='features-select features-select-{$key}'>". drupal_render($form[$key]) ."</div>";
