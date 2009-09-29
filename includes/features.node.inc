@@ -1,5 +1,5 @@
 <?php
-// $Id: features.node.inc,v 1.1.2.10 2009/09/13 23:20:28 yhahn Exp $
+// $Id: features.node.inc,v 1.1.2.11 2009/09/29 15:32:43 jmiccolis Exp $
 
 /**
  * Implementation of hook_features_api().
@@ -94,7 +94,9 @@ function node_features_export_render($module = 'foo', $data) {
     $output[] = "    '{$type}' => array(";
     foreach ($elements as $key => $t) {
       if ($t) {
-        $output[] = "      '{$key}' => t('" . str_replace("'", "\'", $info->$key). "'),";
+        $text = str_replace("'", "\'", $info->$key);
+        $text = !empty($text) ? "t('{$text}')" : "''";
+        $output[] = "      '{$key}' => {$text},";
       }
       else {
         $output[] = "      '{$key}' => '{$info->$key}',";
