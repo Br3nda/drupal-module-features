@@ -1,4 +1,4 @@
-// $Id: features.js,v 1.1.2.5 2009/09/13 23:23:23 yhahn Exp $
+// $Id: features.js,v 1.1.2.6 2009/10/01 20:25:40 yhahn Exp $
 
 Drupal.behaviors.features = function() {
   // Features management form
@@ -68,11 +68,16 @@ Drupal.features = {
       if (uri) {
         $.get(uri, [], function(data) {
           $(elem).find('.admin-loading').hide();
-          if (data.status == 1) {
-            $(elem).find('.admin-overridden').show();
-          }
-          else {
-            $(elem).find('.admin-default').show();
+          switch (data.storage) {
+            case 2:
+              $(elem).find('.admin-needs-review').show();
+              break;
+            case 1:
+              $(elem).find('.admin-overridden').show();
+              break;
+            default:
+              $(elem).find('.admin-default').show();
+              break;
           }
           Drupal.features.checkStatus();
         }, 'json');
