@@ -1,5 +1,5 @@
 <?php
-// $Id: features.export.inc,v 1.1.2.39 2009/10/01 20:25:40 yhahn Exp $
+// $Id: features.export.inc,v 1.1.2.40 2009/10/01 23:25:34 yhahn Exp $
 
 /**
  * @param $items
@@ -586,10 +586,6 @@ function features_get_default($module_name, $component, $reset = FALSE) {
     $default_hooks = features_get_default_hooks();
     if (isset($default_hooks[$component])) {
       $cache[$module_name][$component] = module_invoke($module_name, $default_hooks[$component]);
-    }
-    if ($component == 'imagecache') {
-      $foo = $cache[$module_name][$component];
-      _features_sanitize($foo);
     }
   }
   return isset($cache[$module_name][$component]) ? $cache[$module_name][$component] : FALSE;;
