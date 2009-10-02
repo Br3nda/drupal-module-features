@@ -1,6 +1,17 @@
-// $Id: features.js,v 1.1.2.6 2009/10/01 20:25:40 yhahn Exp $
+// $Id: features.js,v 1.1.2.7 2009/10/02 20:16:57 yhahn Exp $
 
 Drupal.behaviors.features = function() {
+  // Features management form package tabs
+  $("ul#features-form-links li a:not(.features-processed)").each(function() {
+    $(this).addClass('features.processed').click(function() {
+      $(".features-package-active").removeClass('features-package-active');
+      var panel = $(this).attr('href').split('#')[1];
+      $("div.package-" + panel).addClass('features-package-active');
+      $(this).addClass('features-package-active');
+      return false;
+    });
+  });
+
   // Features management form
   $('table.features:not(.processed)').each(function() {
     $(this).addClass('processed');
