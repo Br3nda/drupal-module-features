@@ -1,5 +1,5 @@
 <?php
-// $Id: features.views.inc,v 1.1.2.11 2009/09/14 03:49:25 yhahn Exp $
+// $Id: features.views.inc,v 1.1.2.12 2009/10/12 15:25:56 yhahn Exp $
 
 /**
  * Implementation of hook_features_api().
@@ -193,9 +193,14 @@ function views_handler_dependencies() {
   if (!isset($map)) {
     $map = array();
     foreach (module_implements('views_data') as $module) {
-      $tables = array_keys(module_invoke($module, 'views_data'));
-      foreach ($tables as $table) {
-        $map[$table] = $module;
+      $tables = module_invoke($module, 'views_data');
+      foreach ($tables as $table => $info) {
+        if (isset($info['table'])) {
+          $map[$table] = $module;
+        }
+        else if (!isset($map[$table])) {
+          $map[$table] = $module;
+        }
       }
     }
   }
