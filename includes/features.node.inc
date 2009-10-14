@@ -1,5 +1,5 @@
 <?php
-// $Id: features.node.inc,v 1.1.2.12 2009/09/29 20:19:00 yhahn Exp $
+// $Id: features.node.inc,v 1.1.2.13 2009/10/14 13:17:42 yhahn Exp $
 
 /**
  * Implementation of hook_features_api().
@@ -32,8 +32,11 @@ function node_features_export($data, &$export, $module_name = '') {
   $modules = module_implements('node_info');
   foreach ($modules as $module) {
     $callback = $module ."_node_info";
-    foreach (call_user_func($callback) as $module_type => $module_info) {
-      $type_map[$module_type] = $module;
+    $node_types = call_user_func($callback);
+    if (is_array($node_types)) {
+      foreach ($node_types as $module_type => $module_info) {
+        $type_map[$module_type] = $module;
+      }
     }
   }
 
