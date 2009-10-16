@@ -1,5 +1,5 @@
 <?php
-// $Id: features.user.inc,v 1.1.2.8 2009/10/14 13:59:11 yhahn Exp $
+// $Id: features.user.inc,v 1.1.2.9 2009/10/16 19:01:35 yhahn Exp $
 
 /**
  * Implementation of hook_features_api().
@@ -65,8 +65,13 @@ function user_features_export_render($module = 'foo', $data) {
   foreach ($data as $perm_name) {
     $permission = array();
     $permission['name'] = $perm_name;
-    sort($permissions[$perm_name]);
-    $permission['roles'] = isset($permissions[$perm_name]) ? $permissions[$perm_name] : array();
+    if (isset($permissions[$perm_name])) {
+      sort($permissions[$perm_name]);
+      $permission['roles'] = $permissions[$perm_name];
+    }
+    else {
+      $permission['roles'] = array();
+    }
 
     $code[] = '  // Exported permission: '. $perm_name;
     $code[] = '  $permissions[] = '. features_var_export($permission, '  ') .';';
