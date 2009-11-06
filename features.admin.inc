@@ -1,5 +1,5 @@
 <?php
-// $Id: features.admin.inc,v 1.1.2.32 2009/10/16 19:24:54 yhahn Exp $
+// $Id: features.admin.inc,v 1.1.2.33 2009/11/06 21:30:50 yhahn Exp $
 
 /**
  * Form callback for features export form. Acts as a router based on the form_state.
@@ -354,15 +354,15 @@ function features_admin_form($form_state) {
     $version = !empty($version) ? "<div class='description'>$version</div>" : '';
     $form[$package]['sign'][$name] = array('#type' => 'markup', '#value' => "{$uri} {$version}");
 
-    // Add status link
-    $item = menu_get_item("admin/build/features/{$name}");
-    if ($item && $item['access']) {
+    if (user_access('administer features')) {
+      // Add status link
+      $href = "admin/build/features/{$name}";
       if ($module->status) {
         $state = '<span class="admin-loading features-storage">' . t('Checking...') . '</span>';
         $state .= l(t('Check'), "admin/build/features/{$name}/status", array('attributes' => array('class' => 'admin-check')));
-        $state .= theme('features_storage_link', FEATURES_NEEDS_REVIEW, $item['href']);
-        $state .= theme('features_storage_link', FEATURES_OVERRIDDEN, $item['href']);
-        $state .= theme('features_storage_link', FEATURES_DEFAULT, $item['href']);
+        $state .= theme('features_storage_link', FEATURES_NEEDS_REVIEW, $href);
+        $state .= theme('features_storage_link', FEATURES_OVERRIDDEN, $href);
+        $state .= theme('features_storage_link', FEATURES_DEFAULT, $href);
       }
       else {
         $state = '<span class="features-storage">'. t('Disabled') .'</span>';
@@ -371,13 +371,11 @@ function features_admin_form($form_state) {
         '#type' => 'markup',
         '#value' => !empty($state) ? $state : '',
       );
-    }
-    // Add in recreate link
-    $item = menu_get_item("admin/build/features/{$name}/recreate");
-    if ($item && $item['access']) {
+
+      // Add in recreate link
       $form[$package]['actions'][$name] = array(
         '#type' => 'markup',
-        '#value' => l($item['title'], $item['href'], array('attributes' => array('class' => 'admin-update'))),
+        '#value' => l(t('Recreate'), "admin/build/features/{$name}/recreate", array('attributes' => array('class' => 'admin-update'))),
       );
     }
   }
