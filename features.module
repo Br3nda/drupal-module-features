@@ -1,5 +1,5 @@
 <?php
-// $Id: features.module,v 1.1.2.48 2009/10/02 20:16:57 yhahn Exp $
+// $Id: features.module,v 1.1.2.49 2009/11/06 21:18:00 yhahn Exp $
 
 /**
  * @file
@@ -513,17 +513,6 @@ function features_access_override_actions($feature) {
  */
 function features_form_system_modules_alter(&$form) {
   features_rebuild();
-
-  // Hide feature module from admin/build/modules
-  foreach ($form['validation_modules']['#value'] as $name => $module) {
-    if (isset($module->info['features'])) {
-      unset($form['validation_modules']['#value'][$name]);
-      foreach (array('name', 'version', 'description') as $key) {
-        unset($form[$key][$name]);
-      }
-      unset($form['status']['#options'][$name]);
-    }
-  }
 }
 
 /**
