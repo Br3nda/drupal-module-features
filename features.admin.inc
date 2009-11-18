@@ -1,5 +1,5 @@
 <?php
-// $Id: features.admin.inc,v 1.1.2.38 2009/11/18 22:10:16 yhahn Exp $
+// $Id: features.admin.inc,v 1.1.2.39 2009/11/18 22:51:52 yhahn Exp $
 
 /**
  * Form callback for features export form. Acts as a router based on the form_state.
@@ -433,8 +433,13 @@ function features_admin_components($form_state, $feature) {
         '#default_value' => FALSE,
       );
     }
-    $item = menu_get_item("admin/build/features/{$feature->name}/diff/{$component}");
-    $path = ($item && $item['access']) ? $item['href'] : NULL;
+    if (module_exists('diff')) {
+      $item = menu_get_item("admin/build/features/{$feature->name}/diff/{$component}");
+      $path = ($item && $item['access']) ? $item['href'] : NULL;
+    }
+    else {
+      $path = NULL;
+    }
     $form['components'][$component] = array(
       '#type' => 'markup',
       '#value' => theme('features_storage_link', $states[$feature->name][$component], $path),
