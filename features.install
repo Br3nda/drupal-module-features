@@ -1,5 +1,5 @@
 <?php
-// $Id: features.install,v 1.1.2.4 2009/11/18 21:37:04 yhahn Exp $
+// $Id: features.install,v 1.1.2.5 2009/11/18 23:29:30 yhahn Exp $
 
 /**
  * Implementaton of hook_install().
@@ -63,10 +63,6 @@ function features_update_6100() {
  * have been installed prior to this version of Features. This prevents
  * automatic rebuilds from occurring against any rebuildable components
  * that have been overridden.
- *
- * Any feature implementing a node component that was exported prior to this
- * version of the features.module will need to have its 'module' declaration
- * in hook_node_info() changed from 'node' to 'features'.
  */
 function features_update_6101() {
   // Ensure all of our own API functions still exist in in this version
