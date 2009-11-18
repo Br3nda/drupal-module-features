@@ -1,5 +1,5 @@
 <?php
-// $Id: features.install,v 1.1.2.3 2009/11/18 04:15:34 yhahn Exp $
+// $Id: features.install,v 1.1.2.4 2009/11/18 21:37:04 yhahn Exp $
 
 /**
  * Implementaton of hook_install().
@@ -7,6 +7,15 @@
 function features_install() {
   _features_install_menu();
   db_query("UPDATE {system} SET weight = 20 WHERE name = 'features' AND type = 'module'");
+}
+
+/**
+ * Implementation of hook_uninstall().
+ */
+function features_uninstall() {
+  variable_del('features_codecache');
+  variable_del('features_semaphore');
+  variable_del('features_ignored_orphans');
 }
 
 /**
