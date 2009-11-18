@@ -1,5 +1,5 @@
 <?php
-// $Id: features-form.tpl.php,v 1.1.2.2 2009/10/12 15:26:22 yhahn Exp $
+// $Id: features-form.tpl.php,v 1.1.2.3 2009/11/18 04:36:36 yhahn Exp $
 ?>
 <div class='features-form clear-block'>
   <?php if (count($packages) > 1): ?>
@@ -10,8 +10,10 @@
       <?php print drupal_render($form) ?>
     </div>
     <div class='features-form-links'><?php print theme('links', $package_links, array('id' => 'features-form-links')) ?></div>
-  <?php else: ?>
+  <?php elseif (count($packages) == 1): ?>
     <?php print drupal_render($packages) ?>
     <?php print drupal_render($form) ?>
+  <?php else: ?>
+    <?php print t('No features; consider <a href="!url">adding one.</a>', array('!url' => url('admin/build/features/create'))); ?>
   <?php endif; ?>
 </div>

@@ -1,5 +1,5 @@
 <?php
-// $Id: features.user.inc,v 1.1.2.9 2009/10/16 19:01:35 yhahn Exp $
+// $Id: features.user.inc,v 1.1.2.10 2009/11/18 04:36:36 yhahn Exp $
 
 /**
  * Implementation of hook_features_api().
@@ -7,6 +7,7 @@
 function user_features_api() {
   return array(
     'user' => array(
+      'name' => t('Permissions'),
       'feature_source' => TRUE,
       'default_hook' => 'user_default_permissions',
     )

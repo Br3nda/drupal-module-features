@@ -1,5 +1,5 @@
 <?php
-// $Id: features.views.inc,v 1.1.2.12 2009/10/12 15:25:56 yhahn Exp $
+// $Id: features.views.inc,v 1.1.2.13 2009/11/18 04:36:36 yhahn Exp $
 
 /**
  * Implementation of hook_features_api().
@@ -7,6 +7,7 @@
 function views_features_api() {
   return array(
     'views' => array(
+      'name' => t('Views'),
       'feature_source' => TRUE,
       'default_hook' => 'views_default_views',
       'default_file' => FEATURES_DEFAULTS_INCLUDED,

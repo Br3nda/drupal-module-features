@@ -1,5 +1,5 @@
 <?php
-// $Id: features.content.inc,v 1.1.2.10 2009/10/01 19:52:52 yhahn Exp $
+// $Id: features.content.inc,v 1.1.2.11 2009/11/18 04:36:36 yhahn Exp $
 
 /**
  * Implementation of hook_features_api().
@@ -7,6 +7,7 @@
 function content_features_api() {
   return array(
     'content' => array(
+      'name' => t('CCK'),
       'default_hook' => 'content_default_fields',
     ),
   );
