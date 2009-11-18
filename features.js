@@ -1,4 +1,4 @@
-// $Id: features.js,v 1.1.2.7 2009/10/02 20:16:57 yhahn Exp $
+// $Id: features.js,v 1.1.2.8 2009/11/18 04:15:36 yhahn Exp $
 
 Drupal.behaviors.features = function() {
   // Features management form package tabs
@@ -80,6 +80,9 @@ Drupal.features = {
         $.get(uri, [], function(data) {
           $(elem).find('.admin-loading').hide();
           switch (data.storage) {
+            case 3:
+              $(elem).find('.admin-rebuilding').show();
+              break;
             case 2:
               $(elem).find('.admin-needs-review').show();
               break;

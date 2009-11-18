@@ -1,5 +1,5 @@
 <?php
-// $Id: theme.inc,v 1.1.2.10 2009/10/02 20:16:58 yhahn Exp $
+// $Id: theme.inc,v 1.1.2.11 2009/11/18 04:15:39 yhahn Exp $
 
 /**
  * Display feature component info
@@ -115,11 +115,15 @@ function theme_features_storage_link($storage, $path = NULL, $options = array())
     FEATURES_OVERRIDDEN => 'admin-overridden',
     FEATURES_DEFAULT => 'admin-default',
     FEATURES_NEEDS_REVIEW => 'admin-needs-review',
+    FEATURES_REBUILDING => 'admin-rebuilding',
+    FEATURES_REBUILDABLE => 'admin-rebuilding',
   );
   $text = array(
     FEATURES_OVERRIDDEN => t('Overridden'),
     FEATURES_DEFAULT => t('Default'),
     FEATURES_NEEDS_REVIEW => t('Needs review'),
+    FEATURES_REBUILDING => t('Rebuilding'),
+    FEATURES_REBUILDABLE => t('Rebuilding'),
   );
   if ($path) {
     $options['attributes']['class'] = $classes[$storage] . ' features-storage';

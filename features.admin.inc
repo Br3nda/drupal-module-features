@@ -1,5 +1,5 @@
 <?php
-// $Id: features.admin.inc,v 1.1.2.33 2009/11/06 21:30:50 yhahn Exp $
+// $Id: features.admin.inc,v 1.1.2.34 2009/11/18 04:15:29 yhahn Exp $
 
 /**
  * Form callback for features export form. Acts as a router based on the form_state.
@@ -360,6 +360,7 @@ function features_admin_form($form_state) {
       if ($module->status) {
         $state = '<span class="admin-loading features-storage">' . t('Checking...') . '</span>';
         $state .= l(t('Check'), "admin/build/features/{$name}/status", array('attributes' => array('class' => 'admin-check')));
+        $state .= theme('features_storage_link', FEATURES_REBUILDING, $href);
         $state .= theme('features_storage_link', FEATURES_NEEDS_REVIEW, $href);
         $state .= theme('features_storage_link', FEATURES_OVERRIDDEN, $href);
         $state .= theme('features_storage_link', FEATURES_DEFAULT, $href);
@@ -432,7 +433,6 @@ function features_admin_components($form_state, $feature) {
     }
     $item = menu_get_item("admin/build/features/{$feature->name}/diff/{$component}");
     $path = ($item && $item['access']) ? $item['href'] : NULL;
-    $conflicts[$component] = theme('features_storage_link', $states[$feature->name][$component], $path);
     $form['components'][$component] = array(
       '#type' => 'markup',
       '#value' => theme('features_storage_link', $states[$feature->name][$component], $path),
