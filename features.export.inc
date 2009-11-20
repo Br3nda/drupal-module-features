@@ -1,5 +1,5 @@
 <?php
-// $Id: features.export.inc,v 1.1.2.43 2009/11/18 04:15:32 yhahn Exp $
+// $Id: features.export.inc,v 1.1.2.44 2009/11/20 17:40:11 yhahn Exp $
 
 /**
  * @param $items
@@ -440,7 +440,7 @@ function features_tar_create($files) {
  */
 function features_var_export($var, $prefix = '', $init = TRUE) {
   if (is_object($var)) {
-    $output = method_exists($var, 'export') ? $var->export() : features_var_export((array) $output);
+    $output = method_exists($var, 'export') ? $var->export() : features_var_export((array) $var);
   }
   else if (is_array($var)) {
     if (empty($var)) {
