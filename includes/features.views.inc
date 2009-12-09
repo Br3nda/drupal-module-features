@@ -1,5 +1,5 @@
 <?php
-// $Id: features.views.inc,v 1.1.2.14 2009/12/09 07:03:37 yhahn Exp $
+// $Id: features.views.inc,v 1.1.2.15 2009/12/09 07:40:38 yhahn Exp $
 
 /**
  * Implementation of hook_features_api().
@@ -248,8 +248,9 @@ function views_features_revert($module = NULL) {
 
     // Delete Normal / Overridden views that are defined in code
     foreach ($default_views as $default_view) {
-      $current_view = views_get_view($default_view->name);
-      $current_view->delete();
+      if ($current_view = views_get_view($default_view->name)) {
+        $current_view->delete();
+      }
     }
   }
   else {
