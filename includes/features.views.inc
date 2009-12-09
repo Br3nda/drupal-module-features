@@ -1,5 +1,5 @@
 <?php
-// $Id: features.views.inc,v 1.1.2.13 2009/11/18 04:36:36 yhahn Exp $
+// $Id: features.views.inc,v 1.1.2.14 2009/12/09 07:03:37 yhahn Exp $
 
 /**
  * Implementation of hook_features_api().
@@ -253,7 +253,7 @@ function views_features_revert($module = NULL) {
     }
   }
   else {
-    drupal_set_message(t('Could not load default node types.'), 'error');
+    drupal_set_message(t('Could not load default views.'), 'error');
     return FALSE;
   }
   return TRUE;
