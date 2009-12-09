@@ -1,5 +1,5 @@
 <?php
-// $Id: features.module,v 1.1.2.55 2009/12/09 07:40:38 yhahn Exp $
+// $Id: features.module,v 1.1.2.56 2009/12/09 07:57:19 yhahn Exp $
 
 /**
  * @file
@@ -299,7 +299,7 @@ function features_include() {
 
   // Features provides integration on behalf of these modules.
   // Note that ctools is placed last because it implements hooks "dynamically" for other modules.
-  $modules = array('block', 'content', 'filter', 'imagecache', 'node', 'user', 'views', 'ctools');
+  $modules = array('block', 'content', 'context', 'filter', 'imagecache', 'node', 'user', 'views', 'ctools');
 
   foreach (array_filter($modules, 'module_exists') as $module) {
     module_load_include('inc', 'features', "includes/features.$module");
