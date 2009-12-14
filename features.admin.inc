@@ -1,5 +1,5 @@
 <?php
-// $Id: features.admin.inc,v 1.1.2.39 2009/11/18 22:51:52 yhahn Exp $
+// $Id: features.admin.inc,v 1.1.2.40 2009/12/14 23:05:08 jmiccolis Exp $
 
 /**
  * Form callback for features export form. Acts as a router based on the form_state.
@@ -229,9 +229,6 @@ function features_export_build_form_populate() {
 
   $form_state = array();
   $submitted = $_POST;
-
-  // Only uncomment this for debugging AJAX action
-  $submitted = !empty($_POST) ? $_POST : $_GET;
 
   if ($form = form_get_cache($submitted['form_build_id'], $form_state)) {
     $stub = array();
