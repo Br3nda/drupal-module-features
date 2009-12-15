@@ -1,5 +1,5 @@
 <?php
-// $Id: features.module,v 1.1.2.56 2009/12/09 07:57:19 yhahn Exp $
+// $Id: features.module,v 1.1.2.57 2009/12/15 23:22:52 yhahn Exp $
 
 /**
  * @file
@@ -302,7 +302,9 @@ function features_include() {
   $modules = array('block', 'content', 'context', 'filter', 'imagecache', 'node', 'user', 'views', 'ctools');
 
   foreach (array_filter($modules, 'module_exists') as $module) {
-    module_load_include('inc', 'features', "includes/features.$module");
+    if (!module_hook($module, 'features_api')) {
+      module_load_include('inc', 'features', "includes/features.$module");
+    }
   }
 
   // Clear static cache, since we've now included new implementers.
