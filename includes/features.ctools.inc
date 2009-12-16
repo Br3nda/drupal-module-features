@@ -1,5 +1,5 @@
 <?php
-// $Id: features.ctools.inc,v 1.1.2.10 2009/12/16 16:01:21 yhahn Exp $
+// $Id: features.ctools.inc,v 1.1.2.11 2009/12/16 16:29:23 yhahn Exp $
 
 /**
  * This is a wild hack, but effective.
@@ -135,7 +135,9 @@ function ctools_component_features_export($component, $data, &$export, $module_n
 
   // Add the components
   foreach ($data as $object_name) {
-    $export['features'][$component][$object_name] = $object_name;
+    if (ctools_export_load_object($component, 'names', array($object_name))) {
+      $export['features'][$component][$object_name] = $object_name;
+    }
   }
 
   // Let CTools handle API integration for this component.
