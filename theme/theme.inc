@@ -1,5 +1,5 @@
 <?php
-// $Id: theme.inc,v 1.1.2.12 2009/11/18 20:34:27 jmiccolis Exp $
+// $Id: theme.inc,v 1.1.2.13 2009/12/17 00:22:32 yhahn Exp $
 
 /**
  * Display feature component info
@@ -247,7 +247,7 @@ function theme_features_components($info, $sources = array()) {
       if (!empty($items) || !empty($sources[$component])) {
         $source_items = isset($sources[$component]) ? $sources[$component] : array();
         $rows[] = array(array('data' => $component, 'header' => TRUE));
-        $rows[] = array(array('data' => theme('features_component_list', array_keys($items), $source_items), 'class' => 'component'));
+        $rows[] = array(array('data' => theme('features_component_list', $items, $source_items), 'class' => 'component'));
       }
     }
     if (!empty($info['dependencies'])) {
