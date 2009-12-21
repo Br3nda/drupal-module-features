@@ -1,5 +1,5 @@
 <?php
-// $Id: features.ctools.inc,v 1.1.2.11 2009/12/16 16:29:23 yhahn Exp $
+// $Id: features.ctools.inc,v 1.1.2.12 2009/12/21 15:31:45 yhahn Exp $
 
 /**
  * This is a wild hack, but effective.
@@ -115,11 +115,8 @@ function ctools_component_features_export_options($component) {
       $objects = $schema['export']['list callback']();
       $options = drupal_map_assoc(array_keys($objects));
     }
-    elseif ($objects = ctools_export_load_object($component, 'all')) {
-      foreach ($objects as $object) {
-        $key = $object->{$export_key};
-        $options[$key] = $key;
-      }
+    else if ($objects = ctools_export_load_object($component, 'all')) {
+      $options = drupal_map_assoc(array_keys($objects));
     }
   }
   return $options;
