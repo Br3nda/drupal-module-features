@@ -1,5 +1,5 @@
 <?php
-// $Id: features.module,v 1.1.2.57 2009/12/15 23:22:52 yhahn Exp $
+// $Id: features.module,v 1.1.2.58 2009/12/21 17:43:22 yhahn Exp $
 
 /**
  * @file
@@ -514,6 +514,7 @@ function features_get_orphans($reset = FALSE) {
     $orphaned = array_diff($dependencies['disabled'], $dependencies['enabled']);
     $orphaned = array_intersect($orphaned, module_list(FALSE, FALSE));
     $orphaned = array_diff($orphaned, drupal_required_modules());
+    $orphaned = array_diff($orphaned, array('features'));
 
     // Build final list of modules that can be disabled.
     $modules = features_get_modules(NULL, TRUE);
