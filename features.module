@@ -1,5 +1,5 @@
 <?php
-// $Id: features.module,v 1.1.2.59 2010/01/06 18:46:09 yhahn Exp $
+// $Id: features.module,v 1.1.2.60 2010/01/06 22:21:00 yhahn Exp $
 
 /**
  * @file
@@ -619,7 +619,6 @@ function features_get_feature_title($feature) {
  */
 function features_access_override_actions($feature) {
   if (user_access('administer features')) {
-    drupal_set_message('checked');
     static $access = array();
     if (!isset($access[$feature->name])) {
       // Set a value first. We may get called again from within features_detect_overrides().
