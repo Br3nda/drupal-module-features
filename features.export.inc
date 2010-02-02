@@ -1,5 +1,5 @@
 <?php
-// $Id: features.export.inc,v 1.1.2.46 2009/12/21 21:59:09 yhahn Exp $
+// $Id: features.export.inc,v 1.1.2.47 2010/02/02 16:21:34 yhahn Exp $
 
 /**
  * @param $items
@@ -641,6 +641,7 @@ function features_get_component_states($features = array(), $rebuild_only = TRUE
   }
 
   foreach ($features as $feature) {
+    $cache[$feature] = isset($cache[$feature]) ? $cache[$feature] : array();
     if (module_exists($feature)) {
       foreach ($components as $component) {
         if (!isset($cache[$feature][$component])) {
