@@ -1,5 +1,5 @@
 <?php
-// $Id: features.drush.inc,v 1.1.2.17 2009/12/21 17:12:24 yhahn Exp $
+// $Id: features.drush.inc,v 1.1.2.18 2010/02/02 16:23:15 yhahn Exp $
 
 /**
  * @file
@@ -21,21 +21,21 @@ function features_drush_command() {
     'callback' => 'features_command_list',
     'description' => "List all the available features for your site.",
   );
-  $items['features export'] = array(
+  $items['features-export'] = array(
     'callback' => 'features_command_export',
     'description' => "Export a feature from your site into a module.",
     'arguments' => array(
       'feature' => 'Feature name to export.',
     ),
   );
-  $items['features update'] = array(
+  $items['features-update'] = array(
     'callback' => 'features_command_update',
     'description' => "Update a feature module on your site.",
     'arguments' => array(
       'feature' => 'A space delimited list of features.',
     ),
   );
-  $items['features revert'] = array(
+  $items['features-revert'] = array(
     'callback' => 'features_command_revert',
     'description' => "Revert a feature module on your site.",
     'arguments' => array(
