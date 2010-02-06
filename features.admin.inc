@@ -1,5 +1,5 @@
 <?php
-// $Id: features.admin.inc,v 1.1.2.41 2009/12/21 16:45:11 yhahn Exp $
+// $Id: features.admin.inc,v 1.1.2.42 2010/02/06 00:49:38 yhahn Exp $
 
 /**
  * Form callback for features export form. Acts as a router based on the form_state.
@@ -545,6 +545,12 @@ function features_cleanup_form($form_state, $cache_clear = FALSE) {
   // Clear caches if we're getting a post-submit redirect that requests it.
   if ($cache_clear) {
     drupal_flush_all_caches();
+
+    // The following functions need to be run because drupal_flush_all_caches()
+    // runs rebuilds in the wrong order. The node type cache is rebuilt *after*
+    // the menu is rebuilt, meaning that the menu tree is stale in certain
+    // circumstances after drupal_flush_all_caches(). We rebuild again.
+    menu_rebuild();
   }
 
   // Retrieve orphaned modules and provide them as optional modules to be disabled.
