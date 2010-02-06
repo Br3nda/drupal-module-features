@@ -1,5 +1,5 @@
 <?php
-// $Id: theme.inc,v 1.1.2.13 2009/12/17 00:22:32 yhahn Exp $
+// $Id: theme.inc,v 1.1.2.14 2010/02/06 02:11:43 yhahn Exp $
 
 /**
  * Display feature component info
@@ -24,6 +24,7 @@ function template_preprocess_features_admin_components(&$vars) {
 
   // Components
   $rows = array();
+  $components = features_get_components();
   if (!empty($form['#info']['features'])) {
     foreach ($form['#info']['features'] as $component => $items) {
       if (!empty($items)) {
@@ -35,7 +36,7 @@ function template_preprocess_features_admin_components(&$vars) {
           );
         }
         $header[] = array(
-          'data' => $component,
+          'data' => isset($components[$component]['name']) ? $components[$component]['name'] : $component,
           'header' => TRUE
         );
         $header[] = array(
