@@ -1,5 +1,5 @@
 <?php
-// $Id: features.ctools.inc,v 1.1.2.13 2010/02/06 01:03:47 yhahn Exp $
+// $Id: features.ctools.inc,v 1.1.2.14 2010/02/06 01:17:41 yhahn Exp $
 
 /**
  * This is a wild hack, but effective.
@@ -212,7 +212,7 @@ function _ctools_features_get_info($reset = FALSE) {
             'api' => $schema['export']['api']['api'],
             'default_hook' => $schema['export']['default hook'],
             'current_version' => $schema['export']['api']['current_version'],
-            'module' => $module,
+            'module' => isset($schema['export']['api']['owner']) ? $schema['export']['api']['owner'] : $module,
             'feature_source' => TRUE,
           );
         }
