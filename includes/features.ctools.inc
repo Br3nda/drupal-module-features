@@ -1,5 +1,5 @@
 <?php
-// $Id: features.ctools.inc,v 1.1.2.12 2009/12/21 15:31:45 yhahn Exp $
+// $Id: features.ctools.inc,v 1.1.2.13 2010/02/06 01:03:47 yhahn Exp $
 
 /**
  * This is a wild hack, but effective.
@@ -119,6 +119,7 @@ function ctools_component_features_export_options($component) {
       $options = drupal_map_assoc(array_keys($objects));
     }
   }
+  ksort($options);
   return $options;
 }
 
