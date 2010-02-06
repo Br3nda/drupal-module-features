@@ -1,5 +1,5 @@
 <?php
-// $Id: theme.inc,v 1.1.2.14 2010/02/06 02:11:43 yhahn Exp $
+// $Id: theme.inc,v 1.1.2.15 2010/02/06 02:18:57 yhahn Exp $
 
 /**
  * Display feature component info
@@ -14,9 +14,13 @@ function template_preprocess_features_admin_components(&$vars) {
 
   // Dependencies
   $rows = array();
+  $modules = features_get_info();
   foreach ($form['#dependencies'] as $dependency => $status) {
     $rows[] = array(
-      array('data' => $dependency, 'class' => 'component'),
+      array(
+        'data' => isset($modules[$dependency]->info['name']) ? $modules[$dependency]->info['name'] : $dependency,
+        'class' => 'component'
+      ),
       theme('features_module_status', $status),
     );
   }
