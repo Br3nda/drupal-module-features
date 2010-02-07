@@ -1,5 +1,5 @@
 <?php
-// $Id: features.admin.inc,v 1.1.2.43 2010/02/06 02:59:05 yhahn Exp $
+// $Id: features.admin.inc,v 1.1.2.44 2010/02/07 07:36:02 yhahn Exp $
 
 /**
  * Form callback for features export form. Acts as a router based on the form_state.
@@ -140,6 +140,11 @@ function features_export_form_validate_field($element, &$form_state) {
     case 'project':
       if (!preg_match('!^[a-z0-9_]+$!', $element['#value'])) {
         form_error($element, t('The machine-readable name must contain only lowercase letters, numbers, and underscores.'));
+      }
+      // If user is filling out the feature name for the first time and uses
+      // the name of an existing module throw an error.
+      else if (empty($element['#default_value']) && features_get_info('module', $element['#value'])) {
+        form_error($element, t('A module by the name @name already exists on your site. Please choose a different name.', array('@name' => $element['#value'])));
       }
       break;
     case 'project_status_url':
