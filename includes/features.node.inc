@@ -1,5 +1,5 @@
 <?php
-// $Id: features.node.inc,v 1.1.2.15 2009/12/21 17:30:23 yhahn Exp $
+// $Id: features.node.inc,v 1.1.2.16 2010/02/07 04:13:57 yhahn Exp $
 
 /**
  * Implementation of hook_features_api().
@@ -63,9 +63,13 @@ function node_features_export($data, &$export, $module_name = '') {
           foreach ($content_info['fields'] as $key => $field) {
             $pipe['content'][] = "{$type}-{$field['field_name']}";
           }
+          // If strongarm is present, create a pipe for the extra field weights
+          // variable to be exported.
+          if (module_exists('strongarm')) {
+            $pipe['variable'][] = "content_extra_weights_{$type}";
+          }
         }
       }
-
     }
   }
 
