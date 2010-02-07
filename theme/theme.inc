@@ -1,5 +1,5 @@
 <?php
-// $Id: theme.inc,v 1.1.2.15 2010/02/06 02:18:57 yhahn Exp $
+// $Id: theme.inc,v 1.1.2.16 2010/02/07 03:34:53 yhahn Exp $
 
 /**
  * Display feature component info
@@ -92,6 +92,7 @@ function template_preprocess_features_form(&$vars) {
       $first = FALSE;
     }
   }
+  ksort($package_links);
   $vars['package_links'] = $package_links;
 }
 
