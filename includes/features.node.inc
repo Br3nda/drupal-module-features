@@ -1,5 +1,5 @@
 <?php
-// $Id: features.node.inc,v 1.1.2.16 2010/02/07 04:13:57 yhahn Exp $
+// $Id: features.node.inc,v 1.1.2.17 2010/02/07 05:04:43 yhahn Exp $
 
 /**
  * Implementation of hook_features_api().
@@ -67,6 +67,12 @@ function node_features_export($data, &$export, $module_name = '') {
           // variable to be exported.
           if (module_exists('strongarm')) {
             $pipe['variable'][] = "content_extra_weights_{$type}";
+          }
+        }
+        // Create a pipe for Fieldgroups
+        if (function_exists('fieldgroup_groups') && $groups = fieldgroup_groups($type)) {
+          foreach ($groups as $group) {
+            $pipe['fieldgroup'][] = "{$type}-{$group['group_name']}";
           }
         }
       }
