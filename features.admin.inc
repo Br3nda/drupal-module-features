@@ -1,5 +1,5 @@
 <?php
-// $Id: features.admin.inc,v 1.1.2.44 2010/02/07 07:36:02 yhahn Exp $
+// $Id: features.admin.inc,v 1.1.2.45 2010/03/04 16:14:25 yhahn Exp $
 
 /**
  * Form callback for features export form. Acts as a router based on the form_state.
@@ -536,8 +536,11 @@ function features_form_submit(&$form, &$form_state) {
     $install = array_keys(array_filter($status));
     $disable = array_diff(array_keys($status), $install);
 
-    features_install_modules($install);
+    // Disable first. If there are any features that are disabled that are
+    // dependencies of features that have been queued for install, they will
+    // be re-enabled.
     module_disable($disable);
+    features_install_modules($install);
   }
 }
 
