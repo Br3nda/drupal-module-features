@@ -1,5 +1,5 @@
 <?php
-// $Id: features.drush.inc,v 1.1.2.20 2010/03/06 06:37:16 yhahn Exp $
+// $Id: features.drush.inc,v 1.1.2.21 2010/03/06 06:41:54 yhahn Exp $
 
 /**
  * @file
@@ -20,6 +20,7 @@ function features_drush_command() {
   $items['features'] = array(
     'callback' => 'features_command_list',
     'description' => "List all the available features for your site.",
+    'drupal dependencies' => array('features'),
   );
   $items['features-export'] = array(
     'callback' => 'features_command_export',
@@ -27,6 +28,7 @@ function features_drush_command() {
     'arguments' => array(
       'feature' => 'Feature name to export.',
     ),
+    'drupal dependencies' => array('features'),
   );
   $items['features-update'] = array(
     'callback' => 'features_command_update',
@@ -34,6 +36,7 @@ function features_drush_command() {
     'arguments' => array(
       'feature' => 'A space delimited list of features.',
     ),
+    'drupal dependencies' => array('features'),
   );
   $items['features-revert'] = array(
     'callback' => 'features_command_revert',
@@ -44,6 +47,7 @@ function features_drush_command() {
     'options' => array(
       '--force' => "Force revert even if Features assumes components' state are default.",
     ),
+    'drupal dependencies' => array('features'),
   );
 
   return $items;
