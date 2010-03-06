@@ -1,5 +1,5 @@
 <?php
-// $Id: features.drush.inc,v 1.1.2.19 2010/02/07 05:20:16 yhahn Exp $
+// $Id: features.drush.inc,v 1.1.2.20 2010/03/06 06:37:16 yhahn Exp $
 
 /**
  * @file
@@ -186,7 +186,8 @@ function _features_command_export($stub, $module_name = NULL, $destination = 'si
   }
   $files = features_export_render($export, $module_name, TRUE);
 
-  if ($root = drush_locate_root()) {
+  $root = drush_get_option(array('r', 'root'), drush_locate_root());
+  if ($root) {
     $directory = "$destination/{$module_name}";
     if (is_dir($directory)) {
       drush_print(dt('Module appears to already exist in !dir', array('!dir' => $directory)));
