@@ -1,5 +1,5 @@
 <?php
-// $Id: features.context.inc,v 1.1.2.12 2010/03/06 06:15:09 yhahn Exp $
+// $Id: features.context.inc,v 1.1.2.12.2.1 2010/05/07 17:11:11 adrian Exp $
 
 /**
  * Determine context major branch version.
@@ -196,7 +196,7 @@ function context_features_export_render($module, $data) {
       }
     }
 
-    $code[] = '  $items[] = '. context_var_export($context, '  ') .';';
+    $code[] = '  $items[] = ' . context_var_export($context, '  ') . ';';
   }
 
   $code[] = '  return $items;';
@@ -222,10 +222,10 @@ function context_features_revert($module = NULL) {
     $default_contexts = module_invoke($module, 'context_default_contexts');
 
     // Delete overridden contexts
-    foreach($default_contexts as $default_context) {
+    foreach ($default_contexts as $default_context) {
       $current_context = new StdClass();
       $current_context->namespace = $default_context['namespace'];
-      $current_context->attribute = $default_context['attribute'];  
+      $current_context->attribute = $default_context['attribute'];
       $current_context->value = $default_context['value'];
       $context_to_delete = context_load_context($current_context);
       context_delete_context($context_to_delete);

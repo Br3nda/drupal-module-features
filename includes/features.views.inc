@@ -1,5 +1,5 @@
 <?php
-// $Id: features.views.inc,v 1.1.2.16 2009/12/21 22:25:52 yhahn Exp $
+// $Id: features.views.inc,v 1.1.2.16.2.1 2010/05/07 17:11:11 adrian Exp $
 
 /**
  * Implementation of hook_features_api().
@@ -43,7 +43,7 @@ function views_features_export_render($module = 'foo', $data) {
     // Build the view
     $view = views_get_view($view_name, TRUE);
     if ($view) {
-      $code[] = '  // Exported view: '. $view_name;
+      $code[] = '  // Exported view: ' . $view_name;
       $code[] = $view->export('  ');
       $code[] = '  $views[$view->name] = $view;';
       $code[] = '';

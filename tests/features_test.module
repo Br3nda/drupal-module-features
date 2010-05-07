@@ -1,4 +1,4 @@
 <?php
-// $Id: features_test.module,v 1.1.2.1 2009/12/21 22:28:33 yhahn Exp $
+// $Id: features_test.module,v 1.1.2.1.2.1 2010/05/07 17:11:11 adrian Exp $
 
-include_once('features_test.features.inc');
+include_once DRUPAL_ROOT . '/' . 'features_test.features.inc';
