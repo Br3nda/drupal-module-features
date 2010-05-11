@@ -1,5 +1,5 @@
 <?php
-// $Id: features.ctools.inc,v 1.1.2.17 2010/03/06 06:10:37 yhahn Exp $
+// $Id: features.ctools.inc,v 1.1.2.18 2010/05/11 16:37:48 yhahn Exp $
 
 /**
  * This is a wild hack, but effective.
@@ -70,9 +70,16 @@ function ctools_features_export_render($module = 'foo', $data) {
 
   $first = TRUE;
   foreach ($data as $component) {
-    $module = $info[$component]['module'];
-    $api = $info[$component]['api'];
-    $version = $info[$component]['current_version'];
+    if (isset($info[$component])) {
+      $module = $info[$component]['module'];
+      $api = $info[$component]['api'];
+      $version = $info[$component]['current_version'];
+    }
+    // Allow other CTools plugin APIs that a feature may need to support be
+    // specified by module:api:version in feature info files.
+    else if (strpos($component, ':') !== FALSE) {
+      list($module, $api, $version) = explode(':', $component);
+    }
 
     $if = $first ? 'if' : 'else if';
     $code[] = '  '. $if .' ($module == "'. $module .'" && $api == "'. $api .'") {';
