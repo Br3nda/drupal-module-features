@@ -1,5 +1,5 @@
 <?php
-// $Id: features.ctools.inc,v 1.1.2.18 2010/05/11 16:37:48 yhahn Exp $
+// $Id: features.ctools.inc,v 1.1.2.19 2010/05/11 16:38:40 yhahn Exp $
 
 /**
  * This is a wild hack, but effective.
@@ -81,7 +81,7 @@ function ctools_features_export_render($module = 'foo', $data) {
       list($module, $api, $version) = explode(':', $component);
     }
 
-    $if = $first ? 'if' : 'else if';
+    $if = $first ? 'if' : 'elseif';
     $code[] = '  '. $if .' ($module == "'. $module .'" && $api == "'. $api .'") {';
     $code[] = '    return array("version" => '. $version .');';
     $code[] = '  }';
