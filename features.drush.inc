@@ -1,5 +1,5 @@
 <?php
-// $Id: features.drush.inc,v 1.1.2.21 2010/03/06 06:41:54 yhahn Exp $
+// $Id: features.drush.inc,v 1.1.2.22 2010/05/21 20:50:09 yhahn Exp $
 
 /**
  * @file
@@ -43,6 +43,17 @@ function features_drush_command() {
     'description' => "Revert a feature module on your site.",
     'arguments' => array(
       'feature' => 'A space delimited list of features.',
+    ),
+    'options' => array(
+      '--force' => "Force revert even if Features assumes components' state are default.",
+    ),
+    'drupal dependencies' => array('features'),
+  );
+  $items['features-revert-all'] = array(
+    'callback' => 'features_command_revert_all',
+    'description' => "Revert all enabled feature module on your site.",
+    'arguments' => array(
+      'feature_exclude' => 'A space-delimited list of features to exclude from being reverted',
     ),
     'options' => array(
       '--force' => "Force revert even if Features assumes components' state are default.",
@@ -262,6 +273,24 @@ function features_command_revert() {
     features_command_list();
     return;
   }
+}
+
+/**
+ * Revert all enabled features to their definitions in code. Optionally pass in
+ * a list of features to exclude from being reverted.
+ */
+function features_command_revert_all() {
+  $features_to_revert = array();
+  
+  $features_to_exclude = func_get_args();
+  
+  foreach (features_get_features() as $k => $m) {
+    if ($m->status && !in_array($m->name, $features_to_exclude)) {
+      $features_to_revert[] = $m->name;
+    }
+  }
+
+  call_user_func_array('features_command_revert', $features_to_revert);
 }
 
 /**
