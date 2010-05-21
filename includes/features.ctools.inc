@@ -1,5 +1,5 @@
 <?php
-// $Id: features.ctools.inc,v 1.1.2.19 2010/05/11 16:38:40 yhahn Exp $
+// $Id: features.ctools.inc,v 1.1.2.20 2010/05/21 21:30:26 yhahn Exp $
 
 /**
  * This is a wild hack, but effective.
@@ -137,7 +137,9 @@ function ctools_component_features_export_options($component) {
 function ctools_component_features_export($component, $data, &$export, $module_name = '') {
   // Add the actual implementing module as a dependency
   $info = _ctools_features_get_info();
-  $export['dependencies'][$module] = $info[$component]['module'];
+  if ($module_name !== $info[$component]['module']) {
+    $export['dependencies'][$module] = $info[$component]['module'];
+  }
 
   // Add the components
   foreach ($data as $object_name) {
