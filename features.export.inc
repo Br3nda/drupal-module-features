@@ -1,5 +1,5 @@
 <?php
-// $Id: features.export.inc,v 1.1.2.47 2010/02/02 16:21:34 yhahn Exp $
+// $Id: features.export.inc,v 1.1.2.48 2010/05/21 23:18:21 yhahn Exp $
 
 /**
  * @param $items
@@ -429,6 +429,8 @@ function features_tar_create($files) {
       $tar .= pack("a512", $item);
     }
   }
+  $tar .= pack("a1024","");
+
   if (function_exists('gzencode')) {
     $tar = gzencode($tar);
   }
