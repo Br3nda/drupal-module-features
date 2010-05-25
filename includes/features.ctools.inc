@@ -1,5 +1,5 @@
 <?php
-// $Id: features.ctools.inc,v 1.1.2.21 2010/05/21 22:13:38 yhahn Exp $
+// $Id: features.ctools.inc,v 1.1.2.22 2010/05/25 21:51:30 yhahn Exp $
 
 /**
  * This is a wild hack, but effective.
@@ -32,9 +32,11 @@ function ctools_features_api() {
   return array(
     'ctools' => array(
       'name' => 'CTools export API',
-      'default_hook' => 'ctools_plugin_api',
       'feature_source' => TRUE,
       'duplicates' => FEATURES_DUPLICATES_ALLOWED,
+      // CTools API integration does not include a default hook declaration as
+      // it is not a proper default hook.
+      // 'default_hook' => 'ctools_plugin_api',
     ),
   );
 }
