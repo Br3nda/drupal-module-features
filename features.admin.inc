@@ -1,5 +1,5 @@
 <?php
-// $Id: features.admin.inc,v 1.1.2.47 2010/06/30 16:11:20 yhahn Exp $
+// $Id: features.admin.inc,v 1.1.2.48 2010/06/30 21:29:28 yhahn Exp $
 
 /**
  * Form callback for features export form. Acts as a router based on the form_state.
@@ -272,7 +272,8 @@ function features_export_build_form_populate() {
     $export = features_populate($stub, $submitted['project']);
     $export['dependencies'] = _features_export_preserve_dependencies($export['dependencies'], NULL, $stub['dependencies']);
 
-    drupal_json(array('status' => TRUE, 'data' => theme('features_components', $export, $stub)));
+    $output = theme('features_components', $export, $stub) . theme('status_messages');
+    drupal_json(array('status' => TRUE, 'data' => $output));
     exit;
   }
   drupal_json(array('status' => FALSE, 'data' => ''));

@@ -1,5 +1,5 @@
 <?php
-// $Id: features.node.inc,v 1.1.2.17 2010/02/07 05:04:43 yhahn Exp $
+// $Id: features.node.inc,v 1.1.2.18 2010/06/30 21:29:28 yhahn Exp $
 
 /**
  * Implementation of hook_features_api().
@@ -147,8 +147,7 @@ function node_features_revert($module = NULL) {
     }
   }
   else {
-    drupal_set_message(t('Could not load default node types.'), 'error');
-    // drush_print(dt('Could not load default node types.'));
+    features_log(t('Could not load default node types.'), 'error');
     return FALSE;
   }
   node_types_rebuild();

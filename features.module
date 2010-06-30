@@ -1,5 +1,5 @@
 <?php
-// $Id: features.module,v 1.1.2.64 2010/05/25 04:20:54 yhahn Exp $
+// $Id: features.module,v 1.1.2.65 2010/06/30 21:29:28 yhahn Exp $
 
 /**
  * @file
@@ -720,4 +720,27 @@ function _features_get_roles() {
     );
   }
   return $roles;
+}
+
+/**
+ * Log a message, environment agnostic.
+ *
+ * @param $message
+ *   The message to log.
+ * @param $severity
+ *   The severity of the message: status, warning or error.
+ */
+function features_log($message, $severity = 'status') {
+  if (function_exists('drush_verify_cli')) {
+    if ($severity == 'status') {
+      $severity = 'ok';
+    }
+    elseif ($severity == 'error') {
+      drush_set_error($message);
+      return;
+    }
+    drush_log($message, $severity);
+    return;
+  }
+  drupal_set_message($message, $severity, FALSE);
 }

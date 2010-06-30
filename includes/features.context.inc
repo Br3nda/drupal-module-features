@@ -1,5 +1,5 @@
 <?php
-// $Id: features.context.inc,v 1.1.2.13 2010/06/01 03:43:27 yhahn Exp $
+// $Id: features.context.inc,v 1.1.2.14 2010/06/30 21:29:28 yhahn Exp $
 
 /**
  * Determine context major branch version.
@@ -231,7 +231,7 @@ function context_features_revert($module = NULL) {
     }
   }
   else {
-    drupal_set_message(t('Could not load default contexts.'), 'error');
+    features_log(t('Could not load default contexts.'), 'error');
     return FALSE;
   }
   return TRUE;
