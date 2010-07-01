@@ -1,5 +1,5 @@
 <?php
-// $Id: theme.inc,v 1.1.2.17 2010/06/30 22:57:47 yhahn Exp $
+// $Id: theme.inc,v 1.1.2.18 2010/07/01 18:11:23 yhahn Exp $
 
 /**
  * Display feature component info
@@ -33,7 +33,7 @@ function template_preprocess_features_admin_components(&$vars) {
   $rows = array();
   $components = features_get_components();
   $conflicts = features_get_conflicts();
-  if (!module_exists($form['module']['#value']) && isset($form['module']['#value'])) {
+  if (!module_exists($form['module']['#value']) && isset($form['module']['#value']) && !empty($conflicts[$form['module']['#value']])) {
     $module_conflicts = $conflicts[$form['module']['#value']];
     $conflicts = array();
     foreach ($module_conflicts as $conflict) {
