@@ -1,5 +1,5 @@
 <?php
-// $Id: features.module,v 1.1.2.66 2010/06/30 22:57:47 yhahn Exp $
+// $Id: features.module,v 1.1.2.67 2010/07/01 20:25:37 yhahn Exp $
 
 /**
  * @file
@@ -734,6 +734,7 @@ function _features_get_roles() {
  */
 function features_log($message, $severity = 'status') {
   if (function_exists('drush_verify_cli')) {
+    $message = strip_tags($message);
     if ($severity == 'status') {
       $severity = 'ok';
     }
