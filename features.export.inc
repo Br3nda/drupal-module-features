@@ -1,5 +1,5 @@
 <?php
-// $Id: features.export.inc,v 1.1.2.52 2010/06/30 16:29:46 yhahn Exp $
+// $Id: features.export.inc,v 1.1.2.53 2010/07/01 20:29:12 yhahn Exp $
 
 /**
  * @param $items
@@ -240,6 +240,12 @@ function features_export_render($export, $module_name, $reset = FALSE) {
   // If module exists, let it be and include it in the files
   if ($existing = features_get_modules($module_name, TRUE)) {
     $code['module'] = file_get_contents($existing->filename);
+
+    // If the current module file does not reference the features.inc include,
+    // set a warning message.
+    if (isset($code['features']) && strpos($code['module'], "{$module_name}.features.inc") === FALSE) {
+      features_log(t('@module does not appear to include the @include file.', array('@module' => "{$module_name}.module", '@include' => "{$module_name}.features.inc")), 'warning');
+    }
   }
   // Add a stub module to include the defaults
   else if (!empty($code['features'])) {
