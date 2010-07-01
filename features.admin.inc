@@ -1,5 +1,5 @@
 <?php
-// $Id: features.admin.inc,v 1.1.2.50 2010/07/01 18:37:20 yhahn Exp $
+// $Id: features.admin.inc,v 1.1.2.51 2010/07/01 18:56:44 yhahn Exp $
 
 /**
  * Form callback for features export form. Acts as a router based on the form_state.
@@ -295,6 +295,16 @@ function features_admin_form($form_state) {
   $modules = features_get_modules('', TRUE);
   $conflicts = features_get_conflicts();
 
+  foreach ($modules as $key => $module) {
+    if ($module->status && !empty($module->info['dependencies'])) {
+      foreach ($module->info['dependencies'] as $dependent) {
+        if (isset($features[$dependent])) {
+          $features[$dependent]->dependents[$key] = $module->info['name'];
+        }
+      }
+    }
+  }
+
   $form = array(
     '#features' => $features,
     '#theme' => 'features_form',
@@ -335,6 +345,11 @@ function features_admin_form($form_state) {
         $description .= "<div class='dependencies'>". t('Unmet dependencies: !dependencies', array('!dependencies' => implode(', ', $unmet_dependencies))) ."</div>";
         $disabled = TRUE;
       }
+    }
+
+    if (!empty($module->dependents)) {
+      $disabled = TRUE;
+      $description .= "<div class='requirements'>". t('Required by: !dependents', array('!dependents' => implode(', ', $module->dependents))) ."</div>";
     }
 
     // Detect potential conflicts
