@@ -1,5 +1,5 @@
 <?php
-// $Id: features.drush.inc,v 1.1.2.28 2010/07/02 15:44:40 yhahn Exp $
+// $Id: features.drush.inc,v 1.1.2.29 2010/07/02 17:08:49 yhahn Exp $
 
 /**
  * @file
@@ -153,7 +153,7 @@ function features_command_export() {
   }
   elseif (count($args) > 1) {
     // Assume that the user intends to create a new module based on a list of 
-    // contexts. First argument is assumed to be the name.
+    // components. First argument is assumed to be the name.
     $name = array_shift($args);
     $stub = array();
     foreach ($args as $v) {
