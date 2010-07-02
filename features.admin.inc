@@ -1,5 +1,5 @@
 <?php
-// $Id: features.admin.inc,v 1.1.2.52 2010/07/01 20:46:28 yhahn Exp $
+// $Id: features.admin.inc,v 1.1.2.53 2010/07/02 15:00:01 yhahn Exp $
 
 /**
  * Form callback for features export form. Acts as a router based on the form_state.
@@ -202,7 +202,10 @@ function features_export_build_form_submit($form, &$form_state) {
     }
     if (features_get_modules($module_name, TRUE)) {
       $module_path = drupal_get_path('module', $module_name);
-      foreach (file_scan_directory($module_path, '.*') as $file) {
+      // file_scan_directory() can throw warnings when using PHP 5.3, messing
+      // up the output of our file stream. Suppress errors in this one case in
+      // order to produce valid output.
+      foreach (@file_scan_directory($module_path, '.*') as $file) {
         $filename = substr($file->filename, strlen($module_path) + 1);
         if (!in_array($filename, $filenames)) {
           // Add this file.
