@@ -1,5 +1,5 @@
 <?php
-// $Id: features.menu.inc,v 1.1.2.6 2009/11/18 04:36:36 yhahn Exp $
+// $Id: features.menu.inc,v 1.1.2.7 2010/07/02 03:17:04 yhahn Exp $
 
 /**
  * Implementation of hook_features_api().
@@ -9,6 +9,7 @@ function menu_features_api() {
     'menu' => array(
       'name' => t('Menu items'),
       'default_hook' => 'menu_default_items',
+      'default_file' => FEATURES_DEFAULTS_INCLUDED,
     ),
   );
 }

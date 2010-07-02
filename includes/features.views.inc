@@ -1,5 +1,59 @@
 <?php
-// $Id: features.views.inc,v 1.1.2.17 2010/06/30 21:29:28 yhahn Exp $
+// $Id: features.views.inc,v 1.1.2.18 2010/07/02 03:17:04 yhahn Exp $
+
+/**
+ * Implementation of hook_features_api().
+ */
+function views_api_features_api() {
+  return array(
+    'views_api' => array(
+      'name' => t('Views API'),
+      'feature_source' => FALSE,
+      'duplicates' => FEATURES_DUPLICATES_ALLOWED,
+      // Views API integration does not include a default hook declaration as
+      // it is not a proper default hook.
+      // 'default_hook' => 'views_api',
+    ),
+  );
+}
+
+/**
+ * Implementation of hook_features_export().
+ */
+function views_api_features_export($data, &$export, $module_name = '') {
+  // Add views dependency
+  $export['dependencies']['views'] = 'views';
+
+  // Add the actual views API hook entries to be accounted for in
+  // hook_views_api(). The components are actually identified by a delimited
+  // list of values: `key:value`. Currently only the 'api' key is supported
+  // as Features does not yet know how to write to subdirectories.
+  foreach ($data as $component) {
+    if (is_numeric($component)) {
+      $version = "api:{$component}";
+      $export['features']['views_api'][$version] = $version;
+    }
+  }
+
+  return array();
+}
+
+/**
+ * Implementation of hook_features_export_render().
+ * Adds the views mothership hook, views_api().
+ */
+function views_api_features_export_render($module, $data) {
+  $values = array();
+  foreach ($data as $component) {
+    $split = explode(':', $component);
+    if (count($split) === 2) {
+      list($key, $value) = $split;
+      $values[$key] = $value;
+    }
+  }
+  $code = '  return ' . features_var_export($values, '  ') . ';';
+  return array('views_api' => $code);
+}
 
 /**
  * Implementation of hook_features_api().
@@ -10,7 +64,8 @@ function views_features_api() {
       'name' => t('Views'),
       'feature_source' => TRUE,
       'default_hook' => 'views_default_views',
-      'default_file' => FEATURES_DEFAULTS_INCLUDED,
+      'default_file' => FEATURES_DEFAULTS_CUSTOM,
+      'default_filename' => 'views_default',
     ),
   );
 }
@@ -68,6 +123,7 @@ function views_features_export($data, &$export, $module_name = '') {
   $views = array();
   foreach ($data as $view_name) {
     // Add to exports
+    $export['features']['views_api']['api:'. views_api_version()] = 'api:'. views_api_version();
     $export['features']['views'][$view_name] = $view_name;
 
     // Build the view

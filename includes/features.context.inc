@@ -1,5 +1,5 @@
 <?php
-// $Id: features.context.inc,v 1.1.2.14 2010/06/30 21:29:28 yhahn Exp $
+// $Id: features.context.inc,v 1.1.2.15 2010/07/02 03:17:04 yhahn Exp $
 
 /**
  * Determine context major branch version.
@@ -23,6 +23,8 @@ function context_features_api() {
       'api' => 'context',
       'current_version' => 3,
       'module' => 'context',
+      'default_file' => FEATURES_DEFAULTS_CUSTOM,
+      'default_filename' => 'context',
     );
   }
   // 2.x

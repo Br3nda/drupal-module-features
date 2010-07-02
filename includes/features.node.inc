@@ -1,5 +1,5 @@
 <?php
-// $Id: features.node.inc,v 1.1.2.18 2010/06/30 21:29:28 yhahn Exp $
+// $Id: features.node.inc,v 1.1.2.19 2010/07/02 03:17:04 yhahn Exp $
 
 /**
  * Implementation of hook_features_api().
@@ -10,7 +10,6 @@ function node_features_api() {
       'name' => t('Content types'),
       'feature_source' => TRUE,
       'default_hook' => 'node_info',
-      'default_file' => FEATURES_DEFAULTS_INCLUDED,
     ),
   );
 }

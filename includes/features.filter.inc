@@ -1,5 +1,5 @@
 <?php
-// $Id: features.filter.inc,v 1.1.2.9 2010/02/07 05:12:08 yhahn Exp $
+// $Id: features.filter.inc,v 1.1.2.10 2010/07/02 03:17:04 yhahn Exp $
 
 /**
  * Implementation of hook_features_api().
@@ -9,6 +9,7 @@ function filter_features_api() {
     'filter' => array(
       'name' => t('Filter formats'),
       'default_hook' => 'filter_default_formats',
+      'default_file' => FEATURES_DEFAULTS_INCLUDED,
     ),
   );
 }
@@ -71,6 +72,7 @@ function filter_features_revert($module) {
  * Implementation of hook_features_rebuild().
  */
 function filter_features_rebuild($module) {
+  features_include_defaults('filter');
   $defaults = module_invoke($module, 'filter_default_formats');
   if (!empty($defaults)) {
     foreach ($defaults as $format) {
