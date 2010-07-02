@@ -1,5 +1,5 @@
 <?php
-// $Id: features.drush.inc,v 1.1.2.26 2010/07/01 20:46:28 yhahn Exp $
+// $Id: features.drush.inc,v 1.1.2.27 2010/07/02 14:40:51 yhahn Exp $
 
 /**
  * @file
@@ -409,7 +409,7 @@ function features_command_diff() {
  * @return
  *   FALSE.  See drush_set_error().
  */
-function _features_drush_set_error($feature, $error) {
+function _features_drush_set_error($feature, $error = '') {
   $args = array('!feature' => $feature);
 
   switch ($error) {
