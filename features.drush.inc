@@ -1,5 +1,5 @@
 <?php
-// $Id: features.drush.inc,v 1.1.2.30 2010/07/02 21:11:00 yhahn Exp $
+// $Id: features.drush.inc,v 1.1.2.31 2010/07/02 21:13:33 yhahn Exp $
 
 /**
  * @file
@@ -363,6 +363,26 @@ function drush_features_diff() {
     return;
   }
   module_load_include('php', 'diff', 'DiffEngine');
+
+  if (!class_exists('DiffFormatter')) {
+    if (drush_confirm(dt('It seems that the Diff module is not available. Would you like to download and enable it?'))) {
+      // Download it if it's not already here.
+      $project_info = drush_get_projects();
+      if (empty($project_info['diff']) && !drush_backend_invoke('dl diff')) {
+        return drush_set_error(dt('Diff module could not be downloaded.'));
+      }
+
+      if (!drush_backend_invoke('en diff')) {
+        return drush_set_error(dt('Diff module could not be enabled.'));
+      }
+    }
+    else {
+      return drush_set_error(dt('Diff module is not enabled.'));
+    }
+    // If we're still here, now we can include the DiffEngine again.
+    module_load_include('php', 'diff', 'DiffEngine');
+  }
+
   $formatter = new DiffFormatter();
   $formatter->leading_context_lines = 2;
   $formatter->trailing_context_lines = 2;
