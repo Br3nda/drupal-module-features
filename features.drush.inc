@@ -1,5 +1,5 @@
 <?php
-// $Id: features.drush.inc,v 1.1.2.27 2010/07/02 14:40:51 yhahn Exp $
+// $Id: features.drush.inc,v 1.1.2.28 2010/07/02 15:44:40 yhahn Exp $
 
 /**
  * @file
@@ -290,7 +290,7 @@ function features_command_revert() {
         $components = array();
         $states = features_get_component_states(array($feature->name), FALSE);
         foreach ($states[$feature->name] as $component => $state) {
-          if ($force || (in_array($state, array(FEATURES_OVERRIDDEN, FEATURES_NEEDS_REVIEW)) && features_hook($component, 'features_revert'))) {
+          if ($force || (in_array($state, array(FEATURES_OVERRIDDEN, FEATURES_NEEDS_REVIEW, FEATURES_DEFAULT)) && features_hook($component, 'features_revert'))) {
             $components[] = $component;
           }
         }
