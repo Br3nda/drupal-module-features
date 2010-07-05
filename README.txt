@@ -1,4 +1,4 @@
-$Id: README.txt,v 1.1.2.4 2010/07/02 17:08:49 yhahn Exp $
+$Id: README.txt,v 1.1.2.5 2010/07/05 14:28:33 yhahn Exp $
 
 Features 1.x for Drupal 6.x
 ---------------------------
@@ -52,6 +52,21 @@ targeted interface than `admin/build/modules`. The interface at
 if any of their components have been overridden. If this is the case, you can
 also re-create features to bring the module code up to date with any changes
 that have occurred in the database.
+
+
+Including custom code and adding to your feature
+------------------------------------------------
+Once you've exported your feature you will see that you have several files:
+
+    myfeature.info
+    myfeature.module
+    myfeature.[*].inc
+
+You can add custom code (e.g. custom hook implementations, other functionality,
+etc.) to your feature in `myfeature.module` as you would with any other module.
+Do not change or add to any of the features `.inc` files unless you know what
+you are doing. These files are written to by features on updates so any custom
+changes may be overwritten.
 
 
 Using Features to manage development
