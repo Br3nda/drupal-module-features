@@ -1,5 +1,5 @@
 <?php
-// $Id: features.admin.inc,v 1.1.2.54 2010/07/04 16:43:07 yhahn Exp $
+// $Id: features.admin.inc,v 1.1.2.55 2010/07/05 14:24:50 yhahn Exp $
 
 /**
  * Form callback for features export form. Acts as a router based on the form_state.
@@ -516,13 +516,15 @@ function features_admin_components_review(&$form, &$form_state) {
  * Validate handler for the 'manage features' form.
  */
 function features_form_validate(&$form, &$form_state) {
-  include_once './misc/install.inc';
+  include_once './includes/install.inc';
+  $conflicts = features_get_conflicts();
   foreach ($form_state['values']['status'] as $module => $status) {
-    if ($status)
+    if ($status) {
       if (!empty($conflicts[$module])) {
-      foreach (array_keys($conflicts[$module]) as $conflict) {
-        if (!empty($form_state['values']['status'][$conflict])) {
-          form_set_error('status', t('The feature !module cannot be enabled because it conflicts with !conflict.', array('!module' => $module, '!conflict' => $conflict)));
+        foreach (array_keys($conflicts[$module]) as $conflict) {
+          if (!empty($form_state['values']['status'][$conflict])) {
+            form_set_error('status', t('The feature !module cannot be enabled because it conflicts with !conflict.', array('!module' => $module, '!conflict' => $conflict)));
+          }
         }
       }
       if (!drupal_check_module($module)) {
