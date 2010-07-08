@@ -1,5 +1,5 @@
 <?php
-// $Id: features.export.inc,v 1.1.2.55 2010/07/02 03:17:03 yhahn Exp $
+// $Id: features.export.inc,v 1.1.2.56 2010/07/08 15:18:32 jmiccolis Exp $
 
 /**
  * @param $items
@@ -243,6 +243,9 @@ function features_export_render($export, $module_name, $reset = FALSE) {
   // Add a stub module to include the defaults
   else if (!empty($code['features'])) {
     $code['module'] = "<?php\n\ninclude_once('{$module_name}.features.inc');\n";
+  }
+  else {
+    $code['module'] = "<?php\n\n// Drupal needs this blank file.\n";
   }
   return $code;
 }
