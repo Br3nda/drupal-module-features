@@ -1,5 +1,5 @@
 <?php
-// $Id: features.context.inc,v 1.1.2.15 2010/07/02 03:17:04 yhahn Exp $
+// $Id: features.context.inc,v 1.1.2.16 2010/07/19 19:13:11 yhahn Exp $
 
 /**
  * Determine context major branch version.
@@ -66,9 +66,9 @@ function context_features_export($data, &$export, $module_name = '') {
       if (isset($contexts[$identifier])) {
         $context = $contexts[$identifier];
         // Conditions.
-        // Currently only node, menu and views conditions are supported.
+        // Currently only node and views conditions are supported.
         // @TODO: Should this be delegated to a method on the plugin?
-        foreach (array('node', 'menu', 'views') as $key) {
+        foreach (array('node', 'views') as $key) {
           if (!empty($context->conditions{$key}['values'])) {
             foreach ($context->conditions{$key}['values'] as $item) {
               // Special pipe for views

@@ -1,5 +1,5 @@
 <?php
-// $Id: features.module,v 1.1.2.72 2010/07/19 18:25:08 yhahn Exp $
+// $Id: features.module,v 1.1.2.73 2010/07/19 19:13:11 yhahn Exp $
 
 /**
  * @file
@@ -171,28 +171,6 @@ function features_menu() {
     }
   }
   return $items;
-}
-
-/**
- * Implementation of hook_menu_alter().
- */
-function features_menu_alter(&$cache) {
-  // Collect exported menu items and graft them into the features menu.
-  features_include_defaults('menu');
-  $items = module_invoke_all('menu_default_items');
-  drupal_alter('menu_default_items', $items);
-
-  foreach ($items as $item) {
-    if (!empty($item['path'])) {
-      $path = $item['path'];
-      unset($item['path']);
-      if (!empty($cache[$path])) {
-        $cache[$path] = array_merge($cache[$path], $item);
-        $cache[$path]['type'] = MENU_NORMAL_ITEM;
-        $cache[$path]['menu_name'] = 'features';
-      }
-    }
-  }
 }
 
 /**
