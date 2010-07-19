@@ -1,5 +1,5 @@
 <?php
-// $Id: features.node.inc,v 1.1.2.20 2010/07/08 15:18:32 jmiccolis Exp $
+// $Id: features.node.inc,v 1.1.2.21 2010/07/19 18:38:51 yhahn Exp $
 
 /**
  * Implementation of hook_features_api().
@@ -56,10 +56,11 @@ function node_features_export($data, &$export, $module_name = '') {
       }
 
       // Create a pipe for taxonomy vocabularies.
-      $vocabularies = _taxonomy_features_get_vocabularies();
-      foreach ($vocabularies as $machine_name => $vocabulary) {
-        if (isset($vocabulary->nodes[$type])) {
-          $pipe['taxonomy'][] = $machine_name;
+      if (function_exists('_taxonomy_features_get_vocabularies') && $vocabularies = _taxonomy_features_get_vocabularies()) {
+        foreach ($vocabularies as $machine_name => $vocabulary) {
+          if (isset($vocabulary->nodes[$type])) {
+            $pipe['taxonomy'][] = $machine_name;
+          }
         }
       }
 
