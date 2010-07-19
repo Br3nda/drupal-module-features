@@ -1,5 +1,5 @@
 <?php
-// $Id: features.taxonomy.inc,v 1.1.2.2 2010/07/19 18:17:45 yhahn Exp $
+// $Id: features.taxonomy.inc,v 1.1.2.3 2010/07/19 19:18:01 yhahn Exp $
 
 /**
  * Implementation of hook_features_api().
@@ -125,7 +125,7 @@ function _features_form_taxonomy_form_vocabulary_alter(&$form, &$form_state) {
   $elem = array(
     '#type' => 'textfield',
     '#title' => t('Machine name'),
-    '#help' => t('A system name for this vocabulary, may not be changed once is has been set.'),
+    '#description' => t('A system name for this vocabulary, may not be changed once it has been set.'),
   );
 
   if (!isset($form['module']) || $form['module']['#value'] == 'taxonomy') {
