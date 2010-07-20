@@ -1,5 +1,5 @@
 <?php
-// $Id: theme.inc,v 1.1.2.19 2010/07/20 18:00:38 yhahn Exp $
+// $Id: theme.inc,v 1.1.2.20 2010/07/20 19:01:55 yhahn Exp $
 
 /**
  * Display feature component info
@@ -74,8 +74,9 @@ function template_preprocess_features_admin_components(&$vars) {
         if (element_children($form['revert'])) {
           $data[] = '';
         }
+        $component_conflicts = isset($conflicts[$component]) ? $conflicts[$component] : array();
         $data[] = array(
-          'data' => theme('features_component_list', $items, $items, $conflicts[$component]),
+          'data' => theme('features_component_list', $items, $items, $component_conflicts),
           'colspan' => 2,
           'class' => 'component'
         );
