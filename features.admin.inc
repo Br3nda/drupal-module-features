@@ -1,5 +1,5 @@
 <?php
-// $Id: features.admin.inc,v 1.1.2.57 2010/07/20 15:57:17 yhahn Exp $
+// $Id: features.admin.inc,v 1.1.2.58 2010/07/20 19:14:10 yhahn Exp $
 
 /**
  * Form callback for features export form. Acts as a router based on the form_state.
@@ -314,7 +314,7 @@ function features_admin_form($form_state) {
     }
 
     $disabled = FALSE;
-    $description = $module->info['description'];
+    $description = isset($module->info['description']) ? $module->info['description'] : '';
 
     // Detect unmet dependencies
     if (!empty($module->info['dependencies'])) {

@@ -1,5 +1,5 @@
 <?php
-// $Id: theme.inc,v 1.1.2.20 2010/07/20 19:01:55 yhahn Exp $
+// $Id: theme.inc,v 1.1.2.21 2010/07/20 19:14:10 yhahn Exp $
 
 /**
  * Display feature component info
@@ -10,7 +10,7 @@ function template_preprocess_features_admin_components(&$vars) {
 
   // Basic info
   $vars['name'] = $form['#info']['name'];
-  $vars['description'] = $form['#info']['description'];
+  $vars['description'] = isset($form['#info']['description']) ? $form['#info']['description'] : '';
 
   // Legend/key
   $vars['key'] = array();
