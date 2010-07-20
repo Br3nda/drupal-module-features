@@ -1,5 +1,5 @@
 <?php
-// $Id: features.admin.inc,v 1.1.2.58 2010/07/20 19:14:10 yhahn Exp $
+// $Id: features.admin.inc,v 1.1.2.59 2010/07/20 19:21:20 yhahn Exp $
 
 /**
  * Form callback for features export form. Acts as a router based on the form_state.
@@ -672,6 +672,7 @@ function features_feature_diff($feature, $component = NULL) {
 
   $overrides = features_detect_overrides($feature);
 
+  $output = '';
   if (!empty($overrides)) {
     // Filter overrides down to specified component.
     if (isset($component) && isset($overrides[$component])) {
