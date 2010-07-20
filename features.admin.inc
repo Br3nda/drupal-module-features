@@ -1,5 +1,5 @@
 <?php
-// $Id: features.admin.inc,v 1.1.2.55 2010/07/05 14:24:50 yhahn Exp $
+// $Id: features.admin.inc,v 1.1.2.56 2010/07/20 14:33:36 yhahn Exp $
 
 /**
  * Form callback for features export form. Acts as a router based on the form_state.
@@ -85,6 +85,10 @@ function features_export_form($form_state, $feature = NULL) {
       $default_value = !empty($feature->info['features'][$component]) ? $feature->info['features'][$component] : array();
     }
     if ($options) {
+      // Ensure all options are stripped of potentially bad values.
+      foreach ($options as $k => $v) {
+        $options[$k] = check_plain($v);
+      }
       $form['export']['components']['#options'][$component] = (isset($component_info['name']) ? $component_info['name'] : $component);
       $form['export']['sources'][$component] = array(
         '#type' => 'checkboxes',
