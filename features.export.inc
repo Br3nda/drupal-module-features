@@ -1,5 +1,5 @@
 <?php
-// $Id: features.export.inc,v 1.1.2.57 2010/07/21 00:45:15 yhahn Exp $
+// $Id: features.export.inc,v 1.1.2.58 2010/07/21 21:20:04 yhahn Exp $
 
 /**
  * @param $items
@@ -493,7 +493,7 @@ function features_get_signature($state = 'default', $module_name, $component, $r
       $codecache = variable_get('features_codecache', array());
       return isset($codecache[$module_name][$component]) ? $codecache[$module_name][$component] : FALSE;
     case 'default':
-      $objects = features_get_default($component, $module_name, $reset);
+      $objects = features_get_default($component, $module_name, TRUE, $reset);
       break;
     case 'normal':
       $objects = features_get_normal($component, $module_name, $reset);
@@ -579,7 +579,7 @@ function features_get_normal($component, $module_name, $reset = FALSE) {
 /**
  * Get defaults for a given module/component pair.
  */
-function features_get_default($component, $module_name = NULL, $reset = FALSE) {
+function features_get_default($component, $module_name = NULL, $alter = TRUE, $reset = FALSE) {
   static $cache = array();
   features_include();
   features_include_defaults($component);
@@ -605,7 +605,15 @@ function features_get_default($component, $module_name = NULL, $reset = FALSE) {
       }
       // All other components
       else {
-        $cache[$component][$m] = ($default_hook && module_hook($m, $default_hook)) ? module_invoke($m, $default_hook) : FALSE;
+        if ($default_hook && module_hook($m, $default_hook)) {
+          $cache[$component][$m] = module_invoke($m, $default_hook);
+          if ($alter) {
+            drupal_alter($default_hook, $cache[$component][$m]);
+          }
+        }
+        else {
+          $cache[$component][$m] = FALSE;
+        }
       }
     }
   }
