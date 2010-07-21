@@ -1,5 +1,5 @@
 <?php
-// $Id: theme.inc,v 1.1.2.22 2010/07/21 03:41:34 yhahn Exp $
+// $Id: theme.inc,v 1.1.2.23 2010/07/21 03:43:19 yhahn Exp $
 
 /**
  * Display feature component info
@@ -101,7 +101,7 @@ function template_preprocess_features_form(&$vars) {
   $first = TRUE;
   $package_links = array();
   $packages = element_children($vars['form']);
-		sort($packages);
+  sort($packages);
   foreach ($packages as $package) {
     if (!empty($vars['form'][$package]['status'])) {
       $package_links[$package] = array(
