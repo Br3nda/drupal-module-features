@@ -1,5 +1,5 @@
 <?php
-// $Id: features.menu.inc,v 1.1.2.9 2010/07/21 00:45:15 yhahn Exp $
+// $Id: features.menu.inc,v 1.1.2.10 2010/07/21 23:03:11 yhahn Exp $
 
 /**
  * Implementation of hook_features_api().
@@ -225,7 +225,7 @@ function menu_links_features_revert($module) {
  * Implementation of hook_features_export_rebuild().
  */
 function menu_links_features_rebuild($module) {
-  if ($menu_links = features_get_default($module, 'menu_links')) {
+  if ($menu_links = features_get_default('menu_links', $module)) {
     foreach ($menu_links as $link) {
       // Retrieve the mlid if this is an existing item.
       if ($existing = features_menu_link_load("{$link['menu_name']}:{$link['link_path']}")) {
