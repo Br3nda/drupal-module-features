@@ -1,5 +1,5 @@
 <?php
-// $Id: features.views.inc,v 1.1.2.19 2010/07/21 00:45:15 yhahn Exp $
+// $Id: features.views.inc,v 1.1.2.20 2010/07/21 01:04:02 yhahn Exp $
 
 /**
  * Implementation of hook_features_export().
@@ -260,8 +260,5 @@ function views_features_revert($module) {
         $current_view->delete();
       }
     }
-    return TRUE;
   }
-  features_log(t('Could not load default views.'), 'error');
-  return FALSE;
 }

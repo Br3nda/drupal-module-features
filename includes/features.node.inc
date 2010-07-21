@@ -1,5 +1,5 @@
 <?php
-// $Id: features.node.inc,v 1.1.2.22 2010/07/21 00:45:15 yhahn Exp $
+// $Id: features.node.inc,v 1.1.2.23 2010/07/21 01:04:02 yhahn Exp $
 
 /**
  * Implementation of hook_features_api().
@@ -139,8 +139,5 @@ function node_features_revert($module = NULL) {
     }
     node_types_rebuild();
     menu_rebuild();
-    return TRUE;
   }
-  features_log(t('Could not load default node types.'), 'error');
-  return FALSE;
 }
