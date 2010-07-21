@@ -1,5 +1,5 @@
 <?php
-// $Id: features.taxonomy.inc,v 1.1.2.3 2010/07/19 19:18:01 yhahn Exp $
+// $Id: features.taxonomy.inc,v 1.1.2.4 2010/07/21 00:45:15 yhahn Exp $
 
 /**
  * Implementation of hook_features_api().
@@ -32,22 +32,12 @@ function taxonomy_features_export_options() {
  * @todo Test adding existing dependencies.
  */
 function taxonomy_features_export($data, &$export, $module_name = '') {
-  features_include_defaults('taxonomy');
-
   // taxonomy_default_vocabularies integration is provided by Features.
   $export['dependencies']['features'] = 'features';
   $export['dependencies']['taxonomy'] = 'taxonomy';
 
-  // Collect a vocabulary to module map.
-  $map = array();
-  $modules = module_implements('taxonomy_default_vocabularies');
-  foreach ($modules as $module) {
-    $vocabularies = module_invoke($module, 'taxonomy_default_vocabularies');
-    foreach ($vocabularies as $machine_name => $vocabulary) {
-      $map[$machine_name] = $module;
-    }
-  }
   // Add dependencies for each vocabulary.
+  $map = features_get_default_map('taxonomy');
   foreach ($data as $machine_name) {
     if (isset($map[$machine_name]) && $map[$machine_name] != $module_name) {
       $export['dependencies'][$map[$machine_name]] = $map[$machine_name];
@@ -89,9 +79,7 @@ function taxonomy_features_revert($module) {
  * Rebuilds Taxonomy vocabularies from code defaults.
  */
 function taxonomy_features_rebuild($module) {
-  features_include_defaults('taxonomy');
-  $vocabularies = module_invoke($module, 'taxonomy_default_vocabularies');
-  if (!empty($vocabularies)) {
+  if ($vocabularies = features_get_default('taxonomy', $module)) {
     foreach ($vocabularies as $machine_name => $vocabulary) {
       if ($vid = db_result(db_query("SELECT vid FROM {vocabulary} WHERE module = '%s'", 'features_' . $machine_name))) {
         $vocabulary['vid'] = $vid;
