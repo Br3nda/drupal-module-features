@@ -1,5 +1,5 @@
 <?php
-// $Id: features.admin.inc,v 1.1.2.59 2010/07/20 19:21:20 yhahn Exp $
+// $Id: features.admin.inc,v 1.1.2.60 2010/07/21 00:37:43 yhahn Exp $
 
 /**
  * Form callback for features export form. Acts as a router based on the form_state.
@@ -275,8 +275,9 @@ function features_admin_form($form_state) {
   module_rebuild_cache();
   features_rebuild();
 
-  $features = features_get_features('', TRUE);
-  $modules = features_get_modules('', TRUE);
+  features_get_info(NULL, NULL, TRUE);
+  $modules = features_get_modules();
+  $features = features_get_features();
   $conflicts = features_get_conflicts();
 
   foreach ($modules as $key => $module) {
