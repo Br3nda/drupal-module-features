@@ -1,5 +1,5 @@
 <?php
-// $Id: features.context.inc,v 1.1.2.17 2010/07/21 00:45:15 yhahn Exp $
+// $Id: features.context.inc,v 1.1.2.18 2010/07/21 03:50:08 yhahn Exp $
 
 /**
  * Determine context major branch version.
@@ -223,11 +223,6 @@ function context_features_revert($module = NULL) {
       context_delete_context($context_to_delete);
     }
   }
-  else {
-    features_log(t('Could not load default contexts.'), 'error');
-    return FALSE;
-  }
-  return TRUE;
 }
 
 /**
