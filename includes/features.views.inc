@@ -1,5 +1,5 @@
 <?php
-// $Id: features.views.inc,v 1.1.2.21 2010/07/21 01:07:50 yhahn Exp $
+// $Id: features.views.inc,v 1.1.2.22 2010/07/21 01:18:42 yhahn Exp $
 
 /**
  * Implementation of hook_features_export().
@@ -258,8 +258,11 @@ function views_features_revert($module) {
   if ($default_views = features_get_default('views', $module)) {
     foreach ($default_views as $default_view) {
       if ($current_view = views_get_view($default_view->name)) {
-        $current_view->delete();
+        $current_view->delete(FALSE);
       }
     }
+    // Flush caches.
+    cache_clear_all();
+    menu_rebuild();
   }
 }
