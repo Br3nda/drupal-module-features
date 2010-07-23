@@ -1,5 +1,5 @@
 <?php
-// $Id: features.ctools.inc,v 1.1.2.24 2010/07/21 00:45:15 yhahn Exp $
+// $Id: features.ctools.inc,v 1.1.2.25 2010/07/23 22:29:30 yhahn Exp $
 
 /**
  * This is a wild hack, but effective.
@@ -162,13 +162,9 @@ function ctools_component_features_export($component, $data, &$export, $module_n
  */
 function ctools_component_features_export_render($component, $module = 'foo', $data) {
   ctools_include('export');
-
   $schema = ctools_export_get_schema($component);
-  if (function_exists('page_manager_page_manager_handlers_list')) {
-    page_manager_page_manager_handlers_list();
-  }
+
   if (function_exists($schema['export']['to hook code callback'])) {
-    $list = $schema['export']['list callback']();
     $export = $schema['export']['to hook code callback']($data, $module);
     $code = explode("{\n", $export);
     array_shift($code);
@@ -265,4 +261,13 @@ function _ctools_features_get_info($identifier = NULL, $reset = FALSE) {
   }
 
   return $components;
+}
+
+/**
+ * Implementation of hook_features_export_render() for page_manager.
+ */
+function page_manager_pages_features_export_render($module, $data) {
+  // Ensure that handlers have their code included before exporting.
+  page_manager_get_tasks();
+  return ctools_component_features_export_render('page_manager_pages', $module, $data);
 }
