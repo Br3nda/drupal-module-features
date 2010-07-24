@@ -1,5 +1,5 @@
 <?php
-// $Id: features.taxonomy.inc,v 1.1.2.4 2010/07/21 00:45:15 yhahn Exp $
+// $Id: features.taxonomy.inc,v 1.1.2.5 2010/07/24 21:46:24 yhahn Exp $
 
 /**
  * Implementation of hook_features_api().
@@ -52,7 +52,7 @@ function taxonomy_features_export($data, &$export, $module_name = '') {
 /**
  * Implementation of hook_features_export_render().
  */
-function taxonomy_features_export_render($module = 'foo', $data) {
+function taxonomy_features_export_render($module, $data) {
   $vocabularies = _taxonomy_features_get_vocabularies();
   foreach ($data as $machine_name) {
     foreach ($vocabularies as $k => $v) {

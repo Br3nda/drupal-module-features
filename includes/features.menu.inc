@@ -1,5 +1,5 @@
 <?php
-// $Id: features.menu.inc,v 1.1.2.10 2010/07/21 23:03:11 yhahn Exp $
+// $Id: features.menu.inc,v 1.1.2.11 2010/07/24 21:46:24 yhahn Exp $
 
 /**
  * Implementation of hook_features_api().
@@ -80,7 +80,7 @@ function menu_custom_features_export($data, &$export, $module_name = '') {
 /**
  * Implementation of hook_features_export_render()
  */
-function menu_custom_features_export_render($module = 'foo', $data) {
+function menu_custom_features_export_render($module, $data) {
   $code = array();
   $code[] = '  $menus = array();';
   $code[] = '';
@@ -184,7 +184,7 @@ function menu_links_features_export($data, &$export, $module_name = '') {
 /**
  * Implementation of hook_features_export_render()
  */
-function menu_links_features_export_render($module = 'foo', $data) {
+function menu_links_features_export_render($module, $data) {
   $code = array();
   $code[] = '  $menu_links = array();';
   $code[] = '';

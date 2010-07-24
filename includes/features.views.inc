@@ -1,5 +1,5 @@
 <?php
-// $Id: features.views.inc,v 1.1.2.23 2010/07/21 22:51:30 yhahn Exp $
+// $Id: features.views.inc,v 1.1.2.24 2010/07/24 21:46:24 yhahn Exp $
 
 /**
  * Implementation of hook_features_export().
@@ -80,7 +80,7 @@ function views_features_export_options() {
 /**
  * Implementation of hook_features_export_render().
  */
-function views_features_export_render($module = 'foo', $data) {
+function views_features_export_render($module, $data) {
   $code = array();
   $code[] = '  $views = array();';
   $code[] = '';

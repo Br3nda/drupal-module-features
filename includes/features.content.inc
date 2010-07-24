@@ -1,5 +1,5 @@
 <?php
-// $Id: features.content.inc,v 1.1.2.17 2010/07/24 21:37:51 yhahn Exp $
+// $Id: features.content.inc,v 1.1.2.18 2010/07/24 21:46:24 yhahn Exp $
 
 /**
  * Implementation of hook_features_api().
@@ -80,7 +80,7 @@ function content_features_export($data, &$export, $module_name = '') {
 /**
  * Implementation of hook_features_export_render().
  */
-function content_features_export_render($module = 'foo', $data) {
+function content_features_export_render($module, $data) {
   $translatables = $code = array();
 
   $code[] = '  $fields = array();';

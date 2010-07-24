@@ -1,5 +1,5 @@
 <?php
-// $Id: features.fieldgroup.inc,v 1.1.2.6 2010/07/21 17:59:49 yhahn Exp $
+// $Id: features.fieldgroup.inc,v 1.1.2.7 2010/07/24 21:46:24 yhahn Exp $
 
 /**
  * Implementation of hook_features_api().
@@ -57,7 +57,7 @@ function fieldgroup_features_export($data, &$export, $module_name = '') {
 /**
  * Implementation of hook_features_export_render().
  */
-function fieldgroup_features_export_render($module = 'foo', $data) {
+function fieldgroup_features_export_render($module, $data) {
   $translatables = $code = array();
 
   $code[] = '  $groups = array();';
