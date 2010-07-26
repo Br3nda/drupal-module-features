@@ -1,4 +1,10 @@
-// $Id: CHANGELOG.txt,v 1.1.2.10 2010/07/24 22:14:25 yhahn Exp $
+// $Id: CHANGELOG.txt,v 1.1.2.11 2010/07/26 18:32:23 yhahn Exp $
+
+features DRUPAL-6--1-0-BETA10
+-----------------------------
+- #864742: Ensure CTools plugins.inc is included before calling API functions.
+- #864482 by hadsie: Fix for PHP notice.
+- Fix Views dependency detection.
 
 features DRUPAL-6--1-0-BETA9
 ----------------------------
