@@ -1,5 +1,5 @@
 <?php
-// $Id: features.module,v 1.1.2.75 2010/07/24 20:39:13 yhahn Exp $
+// $Id: features.module,v 1.1.2.76 2010/07/26 16:59:27 yhahn Exp $
 
 /**
  * @file
@@ -330,6 +330,7 @@ function features_include_defaults($components = NULL, $reset = FALSE) {
       }
       // Inclusion of defaults for CTools.
       else if (isset($info['api'], $info['module'], $info['current_version'])) {
+        ctools_include('plugins');
         ctools_plugin_api_include($info['module'], $info['api'], $info['current_version'], $info['current_version']);
       }
       // Inclusion of defaults for components using FEATURES_DEFAULTS_INCLUDED.
