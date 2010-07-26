@@ -1,5 +1,5 @@
 <?php
-// $Id: features.admin.inc,v 1.1.2.62 2010/07/23 23:05:40 yhahn Exp $
+// $Id: features.admin.inc,v 1.1.2.63 2010/07/26 14:09:30 yhahn Exp $
 
 /**
  * Form callback for features export form. Acts as a router based on the form_state.
@@ -89,10 +89,11 @@ function features_export_form($form_state, $feature = NULL) {
     if ($options) {
       // Find all default components that are not provided by this feature and
       // strip them out of the possible options.
-      $map = features_get_default_map($component);
-      foreach ($map as $k => $v) {
-        if (isset($options[$k]) && (!isset($feature->name) || $v !== $feature->name)) {
-          unset($options[$k]);
+      if ($map = features_get_default_map($component)) {
+        foreach ($map as $k => $v) {
+          if (isset($options[$k]) && (!isset($feature->name) || $v !== $feature->name)) {
+            unset($options[$k]);
+          }
         }
       }
       // Ensure all options are stripped of potentially bad values.
