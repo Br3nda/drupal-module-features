@@ -1,4 +1,13 @@
-// $Id: CHANGELOG.txt,v 1.1.2.11 2010/07/26 18:32:23 yhahn Exp $
+// $Id: CHANGELOG.txt,v 1.1.2.12 2010/07/30 19:23:41 yhahn Exp $
+
+features DRUPAL-6--1-0-BETA11
+-----------------------------
+- #865454: Fix for complex menu links component handling.
+- Context: simpler check for API version
+- Blank out .features.inc when appropriate when updating existing features.
+- Fix for haphazard drush features-revert.
+- Adjust features_get_component_map() to allow for easy retrieval of a specific
+  component key.
 
 features DRUPAL-6--1-0-BETA10
 -----------------------------
