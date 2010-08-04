@@ -1,5 +1,5 @@
 <?php
-// $Id: features.admin.inc,v 1.1.2.63 2010/07/26 14:09:30 yhahn Exp $
+// $Id: features.admin.inc,v 1.1.2.64 2010/08/04 22:29:45 yhahn Exp $
 
 /**
  * Form callback for features export form. Acts as a router based on the form_state.
@@ -106,7 +106,7 @@ function features_export_form($form_state, $feature = NULL) {
           '#type' => 'checkboxes',
           '#options' => features_dom_encode_options($options),
           '#title' => $component,
-          '#default_value' => $default_value,
+          '#default_value' => features_dom_encode_options($default_value, FALSE),
           '#ahah' => array(
             'path' => 'admin/build/features/export/populate',
             'wrapper' => 'features-export-populated',
@@ -752,6 +752,7 @@ function features_dom_encode_options($options = array(), $keys_only = TRUE) {
     ':' => '__'. ord(':') .'__',
     '/' => '__'. ord('/') .'__',
     ',' => '__'. ord(',') .'__',
+    '.' => '__'. ord(',') .'__',
   );
   $encoded = array();
   foreach ($options as $key => $value) {
@@ -769,6 +770,7 @@ function features_dom_decode_options($options, $keys_only = FALSE) {
     ':' => '__'. ord(':') .'__',
     '/' => '__'. ord('/') .'__',
     ',' => '__'. ord(',') .'__',
+    '.' => '__'. ord(',') .'__',
   ));
   $encoded = array();
   foreach ($options as $key => $value) {
