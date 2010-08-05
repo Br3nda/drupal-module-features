@@ -1,5 +1,5 @@
 <?php
-// $Id: features.module,v 1.1.2.78 2010/08/05 08:08:06 yhahn Exp $
+// $Id: features.module,v 1.1.2.79 2010/08/05 20:50:03 yhahn Exp $
 
 /**
  * @file
@@ -515,7 +515,7 @@ function features_get_info($type = 'module', $name = NULL, $reset = FALSE) {
     $cache->data = $data;
   }
   if (!empty($name)) {
-    return !empty($cache->data[$type][$name]) ? $cache->data[$type][$name] : array();
+    return !empty($cache->data[$type][$name]) ? $cache->data[$type][$name] : FALSE;
   }
   return !empty($cache->data[$type]) ? $cache->data[$type] : array();
 }
