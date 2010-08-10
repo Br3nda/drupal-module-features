@@ -1,5 +1,5 @@
 <?php
-// $Id: features.admin.inc,v 1.1.2.66 2010/08/09 14:56:58 yhahn Exp $
+// $Id: features.admin.inc,v 1.1.2.67 2010/08/10 21:25:12 yhahn Exp $
 
 /**
  * Form callback for features export form. Acts as a router based on the form_state.
@@ -768,6 +768,8 @@ function features_dom_encode_options($options = array(), $keys_only = TRUE) {
     '/' => '__'. ord('/') .'__',
     ',' => '__'. ord(',') .'__',
     '.' => '__'. ord(',') .'__',
+    '<' => '__'. ord('<') .'__',
+    '>' => '__'. ord('>') .'__',
   );
   $encoded = array();
   foreach ($options as $key => $value) {
@@ -786,6 +788,8 @@ function features_dom_decode_options($options, $keys_only = FALSE) {
     '/' => '__'. ord('/') .'__',
     ',' => '__'. ord(',') .'__',
     '.' => '__'. ord(',') .'__',
+    '<' => '__'. ord('<') .'__',
+    '>' => '__'. ord('>') .'__',
   ));
   $encoded = array();
   foreach ($options as $key => $value) {
