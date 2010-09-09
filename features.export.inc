@@ -1,5 +1,5 @@
 <?php
-// $Id: features.export.inc,v 1.1.2.47.2.2 2010/09/09 18:13:05 yhahn Exp $
+// $Id: features.export.inc,v 1.1.2.47.2.3 2010/09/09 18:20:02 yhahn Exp $
 
 /**
  * @param $items
@@ -370,9 +370,10 @@ function features_export_info($info, $parents = array()) {
 /**
  * Tar creation function. Written by dmitrig01.
  *
- * @param $files
- *   A keyed array where the key is the filepath and the value is the
- *   string contents of the file.
+ * @param $name
+ *   Filename of the file to be tarred.
+ * @param $contents
+ *   String contents of the file.
  *
  * @return
  *   A string of the tar file contents.
