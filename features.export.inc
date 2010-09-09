@@ -1,5 +1,5 @@
 <?php
-// $Id: features.export.inc,v 1.1.2.47.2.3 2010/09/09 18:20:02 yhahn Exp $
+// $Id: features.export.inc,v 1.1.2.47.2.4 2010/09/09 18:58:35 yhahn Exp $
 
 /**
  * @param $items
@@ -236,7 +236,7 @@ function features_export_render($export, $module_name, $reset = FALSE) {
       "{$module_name}.features.views",
       "{$module_name}.features.node"
     );
-    foreach (file_scan_directory(drupal_get_path('module', $module_name), '.*') as $file) {
+    foreach (file_scan_directory(drupal_get_path('module', $module_name), '/.*/') as $file) {
       if (in_array($file->name, $deprecated, TRUE)) {
         features_log(t('The file @filename has been deprecated and can be removed.', array('@filename' => $file->basename)), 'status');
       }
