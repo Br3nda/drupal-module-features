@@ -1,6 +1,6 @@
-$Id: README.txt,v 1.1.2.3.2.1 2010/09/09 18:13:05 yhahn Exp $
+$Id: README.txt,v 1.1.2.3.2.2 2010/09/09 18:19:51 yhahn Exp $
 
-Features 1.x for Drupal 6.x
+Features 1.x for Drupal 7.x
 ---------------------------
 The features module enables the capture and management of features in Drupal. A
 feature is a collection of Drupal entities which taken together satisfy a
