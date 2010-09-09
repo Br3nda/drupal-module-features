@@ -1,5 +1,5 @@
 <?php
-// $Id: features.module,v 1.1.2.63.2.2 2010/09/09 18:13:05 yhahn Exp $
+// $Id: features.module,v 1.1.2.63.2.3 2010/09/09 19:19:02 yhahn Exp $
 
 /**
  * @file
@@ -806,12 +806,3 @@ function features_log($message, $severity = 'status') {
   }
   drupal_set_message($message, $severity, FALSE);
 }
-
-/**
- * Targeted form_alter for vocabulary edit pages.
- */
-function features_form_taxonomy_form_vocabulary_alter(&$form, &$form_state) {
-  module_load_include('inc', 'features', "includes/features.taxonomy");
-  _features_form_taxonomy_form_vocabulary_alter($form, $form_state);
-}
-
