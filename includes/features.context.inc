@@ -1,37 +1,16 @@
 <?php
-// $Id: features.context.inc,v 1.1.2.12.2.2 2010/09/09 18:13:05 yhahn Exp $
-
-/**
- * Determine context major branch version.
- */
-function context_features_get_version() {
-  if (function_exists('context_ctools_plugin_api')) {
-    $api = context_ctools_plugin_api('context', 'plugins');
-    return $api['version'];
-  }
-  return 2;
-}
+// $Id: features.context.inc,v 1.1.2.12.2.3 2010/09/09 18:20:35 yhahn Exp $
 
 /**
  * Implementation of hook_features_api().
  */
 function context_features_api() {
-  $api = array('context' => array());
-  // 3.x
-  if (context_features_get_version() === 3) {
-    $api['context'] = array(
-      'api' => 'context',
-      'current_version' => 3,
-      'module' => 'context',
-      'default_file' => FEATURES_DEFAULTS_CUSTOM,
-      'default_filename' => 'context',
-    );
-  }
-  // 2.x
-  $api['context'] += array(
-    'name' => 'Contexts',
-    'feature_source' => TRUE,
-    'default_hook' => 'context_default_contexts'
+  $api = array(
+    'api' => 'context',
+    'current_version' => 3,
+    'module' => 'context',
+    'default_file' => FEATURES_DEFAULTS_CUSTOM,
+    'default_filename' => 'context',
   );
   return $api;
 }
@@ -40,17 +19,7 @@ function context_features_api() {
  * Implementation of hook_features_export_options();
  */
 function context_features_export_options() {
-  // 3.x
-  if (context_features_get_version() === 3) {
-    return ctools_component_features_export_options('context');
-  }
-  // 2.x
-  $contexts = context_enabled_contexts();
-  $options = array();
-  foreach ($contexts as $identifier => $context) {
-    $options[$identifier] = "{$context->namespace} > {$context->attribute} > {$context->value}";
-  }
-  return $options;
+  return ctools_component_features_export_options('context');
 }
 
 /**
