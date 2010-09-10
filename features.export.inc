@@ -1,5 +1,5 @@
 <?php
-// $Id: features.export.inc,v 1.1.2.47.2.4 2010/09/09 18:58:35 yhahn Exp $
+// $Id: features.export.inc,v 1.1.2.47.2.5 2010/09/10 16:48:26 yhahn Exp $
 
 /**
  * @param $items
@@ -50,7 +50,7 @@ function _features_populate($pipe, &$export, $module_name = '') {
       $function = "{$component}_features_export";
       $more = $function($data, $export, $module_name);
       // Allow other modules to manipulate the pipe to add in additional modules.
-      drupal_alter('features_pipe_' . $component, $more, $data, $export, $module_name);
+      drupal_alter('features_pipe_' . $component, $more, $data, $export);
       // Allow for export functions to request additional exports.
       if (!empty($more)) {
         _features_populate($more, $export, $module_name);
