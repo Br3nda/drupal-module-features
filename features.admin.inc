@@ -1,5 +1,5 @@
 <?php
-// $Id: features.admin.inc,v 1.1.2.45.2.3 2010/09/09 18:58:35 yhahn Exp $
+// $Id: features.admin.inc,v 1.1.2.45.2.4 2010/09/10 13:53:56 yhahn Exp $
 
 /**
  * Form callback for features export form. Acts as a router based on the form_state.
@@ -720,19 +720,15 @@ function features_feature_diff($feature, $component = NULL) {
       $overrides = array($component => $overrides[$component]);
     }
 
-    module_load_include('inc', 'diff', 'diff.engine');
-    $formatter = new DrupalDiffFormatter();
     $rows = array();
     foreach ($overrides as $component => $items) {
-      $diff = new Diff(explode("\n", $items['default']), explode("\n", $items['normal']));
       $rows[] = array(array('data' => $component, 'colspan' => 4, 'header' => TRUE));
-      $rows = array_merge($rows, $formatter->format($diff));
+      $rows = array_merge($rows, diff_get_rows($items['default'], $items['normal']));
     }
     $header = array(
       array('data' => t('Default'), 'colspan' => 2),
       array('data' => t('Overrides'), 'colspan' => 2),
     );
-    // TODO Please change this theme call to use an associative array for the $variables parameter.
     $output .= theme('table', array('header' => $header, 'rows' => $rows, 'attributes' => array('class' => array('diff', 'features-diff'))));
   }
   else {
