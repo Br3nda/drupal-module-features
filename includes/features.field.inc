@@ -1,5 +1,5 @@
 <?php
-// $Id: features.field.inc,v 1.1.2.2 2010/09/10 16:49:38 yhahn Exp $
+// $Id: features.field.inc,v 1.1.2.3 2010/09/10 17:30:55 yhahn Exp $
 
 /**
  * Implements hook_features_api().
@@ -10,8 +10,27 @@ function field_features_api() {
       'name' => t('Fields'),
       'default_hook' => 'field_default_fields',
       'default_file' => FEATURES_DEFAULTS_INCLUDED,
+      'feature_source' => TRUE,
     )
   );
+}
+
+
+/**
+ * Implements hook_features_export_options().
+ */
+function field_features_export_options() {
+  $options = array();
+  $instances = field_info_instances();
+  foreach ($instances as $entity_type => $bundles) {
+    foreach ($bundles as $bundle => $fields) {
+      foreach ($fields as $field) {
+        $identifier = "{$entity_type}-{$bundle}-{$field['field_name']}";
+        $options[$identifier] = $identifier;
+      }
+    }
+  }
+  return $options;
 }
 
 /**
