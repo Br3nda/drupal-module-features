@@ -1,5 +1,5 @@
 <?php
-// $Id: features.filter.inc,v 1.1.2.9.2.3 2010/09/10 15:20:50 yhahn Exp $
+// $Id: features.filter.inc,v 1.1.2.9.2.4 2010/09/10 15:32:26 yhahn Exp $
 
 /**
  * Implementation of hook_features_api().
@@ -116,9 +116,11 @@ function features_filter_format_load($name) {
       $loaded = clone $format;
       $loaded->filters = array();
       foreach (filter_list_format($format_id) as $filter) {
-        $loaded->filters[$filter->name]['weight'] = $filter->weight;
-        $loaded->filters[$filter->name]['status'] = $filter->status;
-        $loaded->filters[$filter->name]['settings'] = $filter->settings;
+        if (!empty($filter->status)) {
+          $loaded->filters[$filter->name]['weight'] = $filter->weight;
+          $loaded->filters[$filter->name]['status'] = $filter->status;
+          $loaded->filters[$filter->name]['settings'] = $filter->settings;
+        }
       }
       return $loaded;
     }
