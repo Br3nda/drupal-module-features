@@ -1,4 +1,4 @@
-; $Id: features.info,v 1.1.2.1.2.2 2010/09/09 18:20:15 yhahn Exp $
+; $Id: features.info,v 1.1.2.1.2.3 2010/09/10 22:35:33 yhahn Exp $
 name = "Features"
 description = "Provides feature management for Drupal."
 core = 7.x
@@ -20,5 +20,6 @@ files[] = includes/features.menu.inc
 files[] = includes/features.node.inc
 files[] = includes/features.user.inc
 files[] = includes/features.views.inc
+files[] = tests/features.test
 files[] = theme/features-admin-components.tpl.php
 files[] = theme/theme.inc
