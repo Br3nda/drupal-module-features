@@ -1,5 +1,5 @@
 <?php
-// $Id: features.admin.inc,v 1.1.2.45.2.4 2010/09/10 13:53:56 yhahn Exp $
+// $Id: features.admin.inc,v 1.1.2.45.2.5 2010/09/10 15:38:21 yhahn Exp $
 
 /**
  * Form callback for features export form. Acts as a router based on the form_state.
@@ -113,7 +113,7 @@ function features_export_form($form, $form_state, $feature = NULL) {
           '#type' => 'checkboxes',
           '#options' => features_dom_encode_options($options),
           '#title' => $component,
-          '#default_value' => $default_value,
+          '#default_value' => features_dom_encode_options($default_value, FALSE),
           '#ajax' => array(
             'callback' => 'features_export_build_form_populate',
             'wrapper' => 'features-export-contents',
