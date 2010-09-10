@@ -1,5 +1,5 @@
 <?php
-// $Id: features.node.inc,v 1.1.2.17.2.2 2010/09/09 18:13:05 yhahn Exp $
+// $Id: features.node.inc,v 1.1.2.17.2.3 2010/09/10 16:49:39 yhahn Exp $
 
 /**
  * Implementation of hook_features_api().
@@ -44,8 +44,8 @@ function node_features_export($data, &$export, $module_name = '') {
 
       $fields = field_info_instances('node', $type);
       foreach ($fields as $name => $field) {
-        $pipe['field'][] = "{$field['bundle']}-{$field['field_name']}";
-      }	 	
+        $pipe['field'][] = "node-{$field['bundle']}-{$field['field_name']}";
+      }
     }
   }
 
@@ -62,8 +62,6 @@ function node_features_export_render($module, $data, $export = NULL) {
     'description' => TRUE,
     'has_title' => FALSE,
     'title_label' => TRUE,
-    'has_body' => FALSE,
-    'body_label' => TRUE,
     'help' => TRUE,
   );
   $output = array();
