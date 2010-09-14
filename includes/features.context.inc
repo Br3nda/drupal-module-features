@@ -1,26 +1,5 @@
 <?php
-// $Id: features.context.inc,v 1.1.2.12.2.3 2010/09/09 18:20:35 yhahn Exp $
-
-/**
- * Implementation of hook_features_api().
- */
-function context_features_api() {
-  $api = array(
-    'api' => 'context',
-    'current_version' => 3,
-    'module' => 'context',
-    'default_file' => FEATURES_DEFAULTS_CUSTOM,
-    'default_filename' => 'context',
-  );
-  return $api;
-}
-
-/**
- * Implementation of hook_features_export_options();
- */
-function context_features_export_options() {
-  return ctools_component_features_export_options('context');
-}
+// $Id: features.context.inc,v 1.1.2.12.2.4 2010/09/14 21:36:26 yhahn Exp $
 
 /**
  * Implementation of hook_features_export().
