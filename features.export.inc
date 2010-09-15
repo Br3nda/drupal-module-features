@@ -1,5 +1,5 @@
 <?php
-// $Id: features.export.inc,v 1.1.2.47.2.6 2010/09/13 00:36:14 yhahn Exp $
+// $Id: features.export.inc,v 1.1.2.47.2.7 2010/09/15 19:12:26 yhahn Exp $
 
 /**
  * @param $items
@@ -145,6 +145,7 @@ function features_export_prepare($export, $module_name, $code, $reset = FALSE) {
   foreach (array_keys($code) as $file) {
     $export['files'][] = $file === 'module' ? "{$module_name}.{$file}" : "{$module_name}.{$file}.inc";
   }
+  $export['files'] = array_unique($export['files']);
   sort($export['files']);
 
   ksort($export);
@@ -242,7 +243,7 @@ function features_export_render($export, $module_name, $reset = FALSE) {
     );
     foreach (file_scan_directory(drupal_get_path('module', $module_name), '/.*/') as $file) {
       if (in_array($file->name, $deprecated, TRUE)) {
-        features_log(t('The file @filename has been deprecated and can be removed.', array('@filename' => $file->basename)), 'status');
+        features_log(t('The file @filename has been deprecated and can be removed.', array('@filename' => $file->filename)), 'status');
       }
       elseif ($file->name === "{$module_name}.features" && empty($code['features'])) {
         $code['features'] = "<?php\n\n// This file is deprecated and can be removed.\n// Please remove include_once('{$module_name}.features.inc') in {$module_name}.module as well.\n";
