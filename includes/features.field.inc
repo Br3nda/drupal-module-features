@@ -1,5 +1,5 @@
 <?php
-// $Id: features.field.inc,v 1.1.2.4 2010/09/17 18:30:51 jmiccolis Exp $
+// $Id: features.field.inc,v 1.1.2.5 2010/09/17 21:08:25 yhahn Exp $
 
 /**
  * Implements hook_features_api().
@@ -167,6 +167,7 @@ function features_field_load($identifier) {
   $instance_info = field_info_instance($entity_type, $field_name, $bundle);
   if ($field_info && $instance_info) {
     unset($field_info['id']);
+    unset($field_info['bundles']);
     unset($instance_info['id']);
     unset($instance_info['field_id']);
     return array(
