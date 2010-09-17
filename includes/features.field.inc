@@ -1,5 +1,5 @@
 <?php
-// $Id: features.field.inc,v 1.1.2.3 2010/09/10 17:30:55 yhahn Exp $
+// $Id: features.field.inc,v 1.1.2.4 2010/09/17 18:30:51 jmiccolis Exp $
 
 /**
  * Implements hook_features_api().
@@ -85,6 +85,8 @@ function field_features_export_render($module, $data, $export = NULL) {
       unset($field['field_config']['columns']);
       unset($field['field_config']['locked']);
       unset($field['field_config']['storage']);
+
+      _field_features_export_sort($field);
       $field_export = features_var_export($field, '  ');
       $field_identifier = features_var_export($identifier);
       $code[] = "  // Exported field: {$field_identifier}";
@@ -103,6 +105,16 @@ function field_features_export_render($module, $data, $export = NULL) {
   $code[] = '  return $fields;';
   $code = implode("\n", $code);
   return array('field_default_fields' => $code);
+}
+
+// Helper to enforce consistency in field export arrays.
+function _field_features_export_sort(&$field) {
+  ksort($field);
+  foreach ($field as $k => $v) {
+    if (is_array($v)) {
+      _field_features_export_sort($field[$k]);
+    }
+  }
 }
 
 /**
