@@ -1,5 +1,5 @@
 <?php
-// $Id: features.menu.inc,v 1.1.2.6.2.3 2010/09/09 18:58:52 yhahn Exp $
+// $Id: features.menu.inc,v 1.1.2.6.2.4 2010/09/17 22:56:45 yhahn Exp $
 
 /**
  * Implementation of hook_features_api().
@@ -132,7 +132,7 @@ function menu_custom_features_rebuild($module) {
  * Implementation of hook_features_export_options().
  */
 function menu_links_features_export_options() {
-  $menu_links = menu_parent_options(array_reverse(menu_get_menus()), NULL);
+  $menu_links = menu_parent_options(menu_get_menus(), array('mlid' => 0));
   $options = array();
   foreach ($menu_links as $key => $name) {
     list($menu_name, $mlid) = explode(':', $key, 2);
