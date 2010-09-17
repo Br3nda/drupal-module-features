@@ -1,5 +1,5 @@
 <?php
-// $Id: features.image.inc,v 1.1.2.2 2010/09/10 22:15:09 yhahn Exp $
+// $Id: features.image.inc,v 1.1.2.3 2010/09/17 21:07:59 yhahn Exp $
 
 /**
  * Implementation of hook_features_api().
@@ -84,15 +84,15 @@ function image_features_revert($module) {
 /**
  * Remove unnecessary keys for export.
  */
-function _image_features_style_sanitize(&$style) {
-  $omit = array('isid', 'ieid', 'storage');
+function _image_features_style_sanitize(&$style, $child = FALSE) {
+  $omit = $child ? array('isid', 'ieid', 'storage') : array('isid', 'ieid', 'storage', 'module');
   if (is_array($style)) {
     foreach ($style as $k => $v) {
       if (in_array($k, $omit, TRUE)) {
         unset($style[$k]);
       }
       else if (is_array($v)) {
-        _image_features_style_sanitize($style[$k]);
+        _image_features_style_sanitize($style[$k], TRUE);
       }
     }
   }
