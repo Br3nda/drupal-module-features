@@ -1,5 +1,5 @@
 <?php
-// $Id: features.export.inc,v 1.1.2.47.2.8 2010/09/16 22:39:36 yhahn Exp $
+// $Id: features.export.inc,v 1.1.2.47.2.9 2010/09/21 15:16:33 yhahn Exp $
 
 /**
  * @param $items
@@ -122,7 +122,7 @@ function _features_export_maximize_dependencies($dependencies, $module_name = ''
 /**
  * Prepare a feature export array into a finalized info array.
  */
-function features_export_prepare($export, $module_name, $code, $reset = FALSE) {
+function features_export_prepare($export, $module_name, $reset = FALSE) {
   $existing = features_get_modules($module_name, $reset);
 
   // Prepare info string -- if module exists, merge into its existing info file
