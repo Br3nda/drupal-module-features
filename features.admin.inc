@@ -1,5 +1,5 @@
 <?php
-// $Id: features.admin.inc,v 1.1.2.45.2.5 2010/09/10 15:38:21 yhahn Exp $
+// $Id: features.admin.inc,v 1.1.2.45.2.6 2010/09/23 06:07:13 yhahn Exp $
 
 /**
  * Form callback for features export form. Acts as a router based on the form_state.
@@ -307,6 +307,13 @@ function features_export_build_form_populate($form, $form_state) {
 }
 
 /**
+ * array_filter() callback for excluding hidden modules.
+ */
+function features_filter_hidden($module) {
+  return empty($module->info['hidden']);
+}
+
+/**
  * admin/build/features page callback.
  */
 function features_admin_form($form, $form_state) {
@@ -314,12 +321,11 @@ function features_admin_form($form, $form_state) {
   module_load_include('inc', 'features', 'features.export');
 
   // Clear & rebuild key caches
-  system_rebuild_module_data();
+  features_get_info(NULL, NULL, TRUE);
   features_rebuild();
 
-  features_get_info(NULL, NULL, TRUE);
-  $modules = features_get_modules();
-  $features = features_get_features();
+  $modules = array_filter(features_get_modules(), 'features_filter_hidden');
+  $features = array_filter(features_get_features(), 'features_filter_hidden');
   $conflicts = features_get_conflicts();
 
   foreach ($modules as $key => $module) {
