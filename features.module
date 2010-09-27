@@ -1,5 +1,5 @@
 <?php
-// $Id: features.module,v 1.1.2.63.2.9 2010/09/23 06:07:13 yhahn Exp $
+// $Id: features.module,v 1.1.2.63.2.10 2010/09/27 14:55:15 yhahn Exp $
 
 /**
  * @file
@@ -771,4 +771,14 @@ function features_log($message, $severity = 'status') {
     return;
   }
   drupal_set_message($message, $severity, FALSE);
+}
+
+/**
+ * Implements hook_hook_info().
+ */
+function features_hook_info() {
+  $hooks['features_api'] = array(
+    'group' => 'features',
+  );
+  return $hooks;
 }
