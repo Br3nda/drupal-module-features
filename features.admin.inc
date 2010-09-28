@@ -1,5 +1,5 @@
 <?php
-// $Id: features.admin.inc,v 1.1.2.45.2.6 2010/09/23 06:07:13 yhahn Exp $
+// $Id: features.admin.inc,v 1.1.2.45.2.7 2010/09/28 20:40:18 yhahn Exp $
 
 /**
  * Form callback for features export form. Acts as a router based on the form_state.
@@ -49,7 +49,7 @@ function features_export_form($form, $form_state, $feature = NULL) {
   );
   $form['info']['version'] = array(
     '#title' => t('Version'),
-    '#description' => t('Examples: 6.x-1.0, 6.x-1.0-beta1'),
+    '#description' => t('Examples: 7.x-1.0, 7.x-1.0-beta1'),
     '#type' => 'textfield',
     '#required' => FALSE,
     '#default_value' => !empty($feature->info['version']) ? $feature->info['version'] : '',
