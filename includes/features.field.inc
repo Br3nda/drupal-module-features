@@ -1,5 +1,5 @@
 <?php
-// $Id: features.field.inc,v 1.1.2.5 2010/09/17 21:08:25 yhahn Exp $
+// $Id: features.field.inc,v 1.1.2.6 2010/09/29 18:01:52 yhahn Exp $
 
 /**
  * Implements hook_features_api().
@@ -129,8 +129,7 @@ function field_features_revert($module) {
  * Rebuilds fields from code defaults.
  */
 function field_features_rebuild($module) {
-  $fields = module_invoke($module, 'field_default_fields');
-  if (!empty($fields)) {
+  if ($fields = features_get_default('field', $module)) {
     field_info_cache_clear();
 
     foreach ($fields as $field) {
